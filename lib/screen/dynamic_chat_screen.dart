@@ -20,9 +20,12 @@ class DynamicChatScreen extends StatefulWidget {
 }
 
 class _DynamicChatScreenState extends State<DynamicChatScreen> {
+  final FocusNode _focusNode = FocusNode();
+  final TextEditingController messageController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     final chatProvider = Provider.of<ChatProvider>(context);
+
     return Scaffold(
       backgroundColor: AppColors.white,
       resizeToAvoidBottomInset: true,
@@ -110,16 +113,166 @@ class _DynamicChatScreenState extends State<DynamicChatScreen> {
                   itemCount: provider.messages.length,
                   itemBuilder:(context,index){
                     final message=provider.messages[index];
-                    return Column();
+                    return ChatMessageCard(message: message);
                   }
                   );
             },
           ),),
-          const Padding(padding: EdgeInsets.all(8),
-          child: Row(children: [
-            Expanded(child:TextField())
-          ],),
-          )
+
+        ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          width: 393.w,
+          height: 99.h,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.grey.withOpacity(0.2),
+                blurRadius: 8,
+                spreadRadius: 2,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: SvgPicture.asset(
+                  AppImages.plusIcon,
+                  width: 40.w,
+                  height: 40.h,
+                ),
+              ),
+              chatTextFormField(
+                bg: AppColors.blueLavender,
+                imagePath: AppImages.emoji,
+                focus: _focusNode,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: SvgPicture.asset(
+                  AppImages.voiceRecorder,
+                  width: 40.w,
+                  height: 40.h,
+                ),
+              ),
+             CircleAvatar(
+               radius: 20,
+               backgroundColor: AppColors.blue,
+               child:  IconButton(
+                   onPressed: (){
+                     if(messageController.text.isNotEmpty){
+                       chatProvider.addMessage(messageController.text);
+                       messageController.clear();
+                     }
+                   }, icon: Icon(Icons.send, color: AppColors.white,)),
+             ),
+
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget chatTextFormField({
+    required Color bg,
+    required String imagePath,
+    required FocusNode focus,
+  }) {
+    return Container(
+      width: 240.w,
+      height: 40.h,
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Emoji Icon
+          Padding(
+            padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 30.h, bottom: 30.h),
+
+          ),
+          // TextFormField
+          Expanded(
+            child: TextFormField(
+              controller: messageController,
+              focusNode: _focusNode,
+
+              style: const TextStyle(
+                decoration: TextDecoration.none,
+                fontSize: 14,
+                color: AppColors.black,
+              ),
+              decoration: const InputDecoration(
+                hintText: "Type a message...",
+                hintStyle: TextStyle(
+                  fontSize: 14,
+                  color: AppColors.white,
+                ),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.zero,
+              ),
+              onFieldSubmitted: (value) {
+                _focusNode.unfocus();
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class ChatMessageCard extends StatelessWidget {
+  final ChatMessage message;
+   const ChatMessageCard({super.key, required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 6.h, horizontal: 10.w),
+      alignment: message.isSentByUser?Alignment.centerRight:Alignment.centerLeft,
+      child: Column(
+        crossAxisAlignment: message.isSentByUser?CrossAxisAlignment.end: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 215.w,
+            height:61.h ,
+          padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: message.isSentByUser?AppColors.ashBlue:AppColors.peach,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(10.r),
+          topLeft: Radius.circular(10.r),
+          bottomRight: message.isSentByUser ? Radius.circular(0.r) : Radius.circular(10.r),
+          bottomLeft: message.isSentByUser ? Radius.circular(10.r) : Radius.circular(0.r),
+        ),
+      ),
+            child: customText(
+                text: message.message,
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: message.isSentByUser?AppColors.black:AppColors.black),
+      ),
+          verticalSpacer(5),
+          customText(
+              text: '${message.timestamp.hour}:${message.timestamp.minute} Min',
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+              color: AppColors.grey),
         ],
       ),
     );
