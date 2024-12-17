@@ -51,15 +51,14 @@ class AppImages{
   static String doctorRyan="images/ryan.png";
   static String doctorEmily="images/emily.png";
   static String male="images/male.png";
-static String notificationIcon="images/notification_icon.svg";
-static String clockIcon="images/clock_icon.svg";
+  static String notificationIcon="images/notification_icon.svg";
+  static String clockIcon="images/clock_icon.svg";
   static String forwardIcon="images/forward_icon.svg";
- static String doctorJohn="images/john.png";
+  static String doctorJohn="images/john.png";
   static String blueForwardArrow="images/blue_forward_arrow.svg";
-
   static String voiceCall="images/voice_call.svg";
   static String videoCall="images/video_call.svg";
-
+  static String image="images/image.png";
   static String emoji="images/emoji.svg";
 
 

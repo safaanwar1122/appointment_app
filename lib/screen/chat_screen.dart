@@ -1,3 +1,4 @@
+import 'package:appointment_app/screen/dynamic_chat_screen.dart';
 import 'package:appointment_app/utils/app_colors.dart';
 import 'package:appointment_app/utils/app_images.dart';
 import 'package:appointment_app/widgets/custome_text.dart';
@@ -195,63 +196,68 @@ class _ChatScreenState extends State<ChatScreen> {
     required String date,
     required String imagePath,
   }) {
-    return Container(
-      width: 344.w,
-      height: 80.h,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(6.r),
-        boxShadow: [
-          BoxShadow(
-            spreadRadius: 1.r,
-            blurRadius: 5,
-            color: AppColors.grey.withOpacity(0.2),
-            offset: const Offset(0, 3),
-          )
-        ],
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-        child: Row(
-          children: [
-            Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-            ),
-            SizedBox(width: 10.w), // Spacing between the image and text
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      customText(
-                        text: title,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: AppColors.black,
-                      ),
-                      customText(
-                        text: date,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: AppColors.grey,
-                      ),
-                    ],
-                  ),
-
-                  customText(
-                    text: chat,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    color: AppColors.grey,
-                  ),
-                ],
-              ),
-            ),
+    return GestureDetector(
+      onTap: (){
+        Get.to(() => const DynamicChatScreen());
+      },
+      child: Container(
+        width: 344.w,
+        height: 80.h,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(6.r),
+          boxShadow: [
+            BoxShadow(
+              spreadRadius: 1.r,
+              blurRadius: 5,
+              color: AppColors.grey.withOpacity(0.2),
+              offset: const Offset(0, 3),
+            )
           ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+          child: Row(
+            children: [
+              Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(width: 10.w), // Spacing between the image and text
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        customText(
+                          text: title,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: AppColors.black,
+                        ),
+                        customText(
+                          text: date,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: AppColors.grey,
+                        ),
+                      ],
+                    ),
+
+                    customText(
+                      text: chat,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      color: AppColors.grey,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

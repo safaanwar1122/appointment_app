@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^6.2.1
   dotted_line: ^3.2.3
   provider: ^6.0.0
+  rich_readmore: ^1.1.1
   #dotted_line_flutter: ^0.1.6
 
 dev_dependencies:

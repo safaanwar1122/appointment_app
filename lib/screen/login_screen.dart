@@ -22,7 +22,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  //final authProvider=Provider.of<AuthProvider>(context);
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -30,13 +29,17 @@ class _LoginScreenState extends State<LoginScreen> {
   final  bool _isLoading = false;
   String? _emailError;
   String? _passwordError;
-
+  var authProvider;
   @override
   Widget build(BuildContext context) {
+    void iniState(){
+         authProvider=Provider.of<AuthProvider>(context);
+    }
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: AppColors.white,
     ));
+
     return Scaffold(
       backgroundColor: AppColors.white,
       resizeToAvoidBottomInset: true,

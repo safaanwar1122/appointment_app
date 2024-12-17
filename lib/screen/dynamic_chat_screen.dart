@@ -21,7 +21,7 @@ class DynamicChatScreen extends StatefulWidget {
 
 class _DynamicChatScreenState extends State<DynamicChatScreen> {
   final FocusNode _focusNode = FocusNode();
-  final TextEditingController messageController=TextEditingController();
+  final TextEditingController messageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final chatProvider = Provider.of<ChatProvider>(context);
@@ -72,7 +72,8 @@ class _DynamicChatScreenState extends State<DynamicChatScreen> {
                         child: CircleAvatar(
                           radius: 20.r,
                           backgroundColor: AppColors.white.withOpacity(0.2),
-                          child: const Icon(Icons.arrow_back, color: AppColors.white),
+                          child: const Icon(Icons.arrow_back,
+                              color: AppColors.white),
                         ),
                       ),
                       horizontalSpacer(10),
@@ -107,22 +108,23 @@ class _DynamicChatScreenState extends State<DynamicChatScreen> {
       ),
       body: Column(
         children: [
-          Expanded(child: Consumer<ChatProvider>(
-            builder: (context,provider, child){
-              return ListView.builder(
-                  itemCount: provider.messages.length,
-                  itemBuilder:(context,index){
-                    final message=provider.messages[index];
-                    return ChatMessageCard(message: message);
-                  }
-                  );
-            },
-          ),),
-
+          Expanded(
+            child: Consumer<ChatProvider>(
+              builder: (context, provider, child) {
+                return ListView.builder(
+                    itemCount: provider.messages.length,
+                    itemBuilder: (context, index) {
+                      final message = provider.messages[index];
+                      return ChatMessageCard(message: message);
+                    });
+              },
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
           width: 393.w,
           height: 99.h,
@@ -163,19 +165,21 @@ class _DynamicChatScreenState extends State<DynamicChatScreen> {
                   height: 40.h,
                 ),
               ),
-             CircleAvatar(
-               radius: 20,
-               backgroundColor: AppColors.blue,
-               child:  IconButton(
-                   onPressed: (){
-                     if(messageController.text.isNotEmpty){
-                       chatProvider.addMessage(messageController.text);
-                       messageController.clear();
-                     }
-                   }, icon: Icon(Icons.send, color: AppColors.white,)),
-             ),
-
-
+              CircleAvatar(
+                radius: 20,
+                backgroundColor: AppColors.blue,
+                child: IconButton(
+                    onPressed: () {
+                      if (messageController.text.isNotEmpty) {
+                        chatProvider.addMessage(messageController.text);
+                        messageController.clear();
+                      }
+                    },
+                    icon: Icon(
+                      Icons.send,
+                      color: AppColors.white,
+                    )),
+              ),
             ],
           ),
         ),
@@ -201,15 +205,14 @@ class _DynamicChatScreenState extends State<DynamicChatScreen> {
         children: [
           // Emoji Icon
           Padding(
-            padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 30.h, bottom: 30.h),
-
+            padding: EdgeInsets.only(
+                left: 10.w, right: 10.w, top: 30.h, bottom: 30.h),
           ),
           // TextFormField
           Expanded(
             child: TextFormField(
               controller: messageController,
               focusNode: _focusNode,
-
               style: const TextStyle(
                 decoration: TextDecoration.none,
                 fontSize: 14,
@@ -235,38 +238,47 @@ class _DynamicChatScreenState extends State<DynamicChatScreen> {
   }
 }
 
-
 class ChatMessageCard extends StatelessWidget {
   final ChatMessage message;
-   const ChatMessageCard({super.key, required this.message});
+  const ChatMessageCard({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 6.h, horizontal: 10.w),
-      alignment: message.isSentByUser?Alignment.centerRight:Alignment.centerLeft,
+      alignment:
+          message.isSentByUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Column(
-        crossAxisAlignment: message.isSentByUser?CrossAxisAlignment.end: CrossAxisAlignment.start,
+        crossAxisAlignment: message.isSentByUser
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 215.w,
-            height:61.h ,
-          padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: message.isSentByUser?AppColors.ashBlue:AppColors.peach,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(10.r),
-          topLeft: Radius.circular(10.r),
-          bottomRight: message.isSentByUser ? Radius.circular(0.r) : Radius.circular(10.r),
-          bottomLeft: message.isSentByUser ? Radius.circular(10.r) : Radius.circular(0.r),
-        ),
-      ),
-            child: customText(
-                text: message.message,
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-                color: message.isSentByUser?AppColors.black:AppColors.black),
-      ),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 0.55.sw),
+            child: Container(
+
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: message.isSentByUser ? AppColors.ashBlue : AppColors.peach,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(10.r),
+                  topLeft: Radius.circular(10.r),
+                  bottomRight: message.isSentByUser
+                      ? Radius.circular(0.r)
+                      : Radius.circular(10.r),
+                  bottomLeft: message.isSentByUser
+                      ? Radius.circular(10.r)
+                      : Radius.circular(0.r),
+                ),
+              ),
+              child: customText(
+                  text: message.message,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                  color:
+                  message.isSentByUser ? AppColors.black : AppColors.black),
+            ),
+          ),
           verticalSpacer(5),
           customText(
               text: '${message.timestamp.hour}:${message.timestamp.minute} Min',
@@ -278,7 +290,3 @@ class ChatMessageCard extends StatelessWidget {
     );
   }
 }
-
-
-
-

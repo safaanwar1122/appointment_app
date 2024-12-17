@@ -3,6 +3,8 @@ class AppConstants{
   static String login="Login";
   static String getStarted="GET STARTED";
   static String myAppointments="My Appointments";
+  static String bookAppointments="Book Appointments";
+  static String appointmentDetails="Appointments  Details";
   static String chat="Chat";
   static String message="Messages";
   static String calls="Calls";
