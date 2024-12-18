@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/auth_provider.dart';
+import '../controllers/chat_provider.dart';
 import '../models/chat_message_model.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_images.dart';

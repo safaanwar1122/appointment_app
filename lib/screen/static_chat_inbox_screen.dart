@@ -325,5 +325,3 @@ class StaticChatMessage {
 
 
 
-
-//https://github.com/mehmetfatiherdem/code-from-my-tutorials

@@ -61,8 +61,15 @@ class AppImages{
   static String image="images/image.png";
   static String emoji="images/emoji.svg";
   static String scheduleCancelIcon="images/schedule_cancel.svg";
-
-
-
+  static String callDrop="images/call_drop.svg";
+  static String speaker="images/speaker.svg";
+  static String mike="images/mike.svg";
+  static String dot="images/dot.svg";
+  static String doctor="images/doctor.png";
+  static String patient="images/patient.png";
+  static String backwardForwardArrow="images/forward_backward_arrow.svg";
+  static String confirmation="images/confirmation.svg";
+  static String clock="images/clock.svg";
+  static String time="images/time.svg";
 }
 

@@ -10,6 +10,7 @@ import '../utils/app_colors.dart';
 import '../utils/app_constants.dart';
 import '../widgets/custome_text.dart';
 import '../widgets/spacer.dart';
+import 'appointment_details_screen.dart';
 import 'appointmnet_successful_screen.dart';
 
 class BookAppointmentScreen extends StatefulWidget {
@@ -137,7 +138,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 customButton(
                     label: 'Make Appointment',
                     onPressed: (){
-                      Get.to(()=>const AppointmentSuccessfulScreen());
+                      Get.to(()=>const AppointmentDetailsScreen());
                     },
                     buttonColor: AppColors.blue,
                     textColor: AppColors.white)

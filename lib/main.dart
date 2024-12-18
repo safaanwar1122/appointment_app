@@ -11,34 +11,39 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import 'controllers/chat_provider.dart';
+
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: RegisterAllProviders.allProvidersList,
-    child:
-
-    ScreenUtilInit(
+    return MultiProvider(
+      providers: RegisterAllProviders.allProvidersList,
+      child: ScreenUtilInit(
         designSize: const Size(393, 852),
-        child: ChangeNotifierProvider(create: (_)=>ChatProvider(),
-          child: GetMaterialApp(
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-              textTheme: GoogleFonts.interTextTheme(
-                Theme.of(context).textTheme,
+        child: Consumer<AuthProvider>(
+          builder: (context, controller, child) {
+            return GetMaterialApp(
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+                textTheme: GoogleFonts.interTextTheme(
+                  Theme.of(context).textTheme,
+                ),
               ),
-            ),
-            debugShowCheckedModeBanner: false,
-            //home:    BookAppointmentScreen(),
-            home:    SplashScreen(),
-          ),)
-    ),
+              debugShowCheckedModeBanner: false,
+              // home: BookAppointmentScreen(),
+              home: SplashScreen(),
+            );
+          },
+        ),
+      ),
     );
   }
 }
