@@ -10,7 +10,7 @@ Widget customText({
   double? lineHeight,
   TextDecoration? decoration,
   Color? decorationColor,
-
+TextAlign? textAlign,
 }) {
   return Text(
     text,
@@ -23,5 +23,6 @@ Widget customText({
       fontFamily: GoogleFonts.inter().fontFamily,
       decorationColor: decorationColor,
     ),
+    textAlign: textAlign,
   );
 }

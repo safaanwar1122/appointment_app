@@ -1,8 +1,8 @@
+import 'package:appointment_app/screen/video_call_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/auth_provider.dart';
@@ -54,11 +54,16 @@ class _DynamicChatScreenState extends State<DynamicChatScreen> {
                 Positioned(
                   right: 20.w,
                   top: 100.h,
-                  child: CircleAvatar(
-                    radius: 20.r,
-                    backgroundColor: AppColors.darkBlue,
-                    child: SvgPicture.asset(AppImages.videoCall),
-                  ),
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.to(()=> const VideoCallScreen());
+                    },
+                    child: CircleAvatar(
+                      radius: 20.r,
+                      backgroundColor: AppColors.darkBlue,
+                      child: SvgPicture.asset(AppImages.videoCall),
+                    ),
+                  )
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 70.h, left: 16.w, right: 16.w),
@@ -175,7 +180,7 @@ class _DynamicChatScreenState extends State<DynamicChatScreen> {
                         messageController.clear();
                       }
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.send,
                       color: AppColors.white,
                     )),

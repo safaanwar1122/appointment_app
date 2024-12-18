@@ -139,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         customRowContainer(
                           assetImagePath: AppImages.blueUser,
                           text: "Profile",
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 16,
                             color: AppColors.white,
                           ),
@@ -153,7 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         customRowContainer(
                           assetImagePath: AppImages.heart,
                           text: "Favourite",
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 16,
                             color: AppColors.white,
                           ),
@@ -167,7 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         customRowContainer(
                           assetImagePath: AppImages.wallet,
                           text: "Payment Method",
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 16,
                             color: AppColors.white,
                           ),
@@ -181,7 +181,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         customRowContainer(
                           assetImagePath: AppImages.blueLock,
                           text: "Privacy Policy",
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 16,
                             color: AppColors.white,
                           ),
@@ -195,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         customRowContainer(
                           assetImagePath: AppImages.settings,
                           text: "Settings",
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 16,
                             color: AppColors.white,
                           ),
@@ -209,7 +209,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         customRowContainer(
                           assetImagePath: AppImages.questionMark,
                           text: "Help",
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 16,
                             color: AppColors.white,
                           ),
@@ -224,7 +224,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         customRowContainer(
                           assetImagePath: AppImages.logout,
                           text: "Logout",
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 16,
                             color: AppColors.white,
                           ),

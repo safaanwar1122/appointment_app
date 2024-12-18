@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../utils/app_constants.dart';
+import 'book_appointment_screen.dart';
 
 class AppointmentScreen extends StatefulWidget {
   const AppointmentScreen({super.key});
@@ -185,7 +186,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(2.r),
-                                      topRight: Radius.circular(2.4),
+                                      topRight: const Radius.circular(2.4),
                                       bottomLeft: Radius.circular(2.r),
                                       bottomRight: Radius.circular(2.r),
                                     ),
@@ -330,7 +331,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   width: 121.w,
                   height: 36.h,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() =>const BookAppointmentScreen());
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blue,
                       shape: RoundedRectangleBorder(

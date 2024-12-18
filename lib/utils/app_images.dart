@@ -39,7 +39,7 @@ class AppImages{
   static String plusIcon="images/plus_icon.svg";
   static String voiceRecorder="images/voice_recorder.svg";
   static String scheduleAppointmentIcon="images/schedule_appointment_icon.svg";
-  static String appointmentCancelIcon="images/appointment_cancel_icon.svg";
+  static String appointmentCancelIcon="images/appointment_cancel.svg";
   static String medicalHistoryIcon="images/medical_history_icon.svg";
   static String yearsExpIcon="images/years_exp_icon.svg";
   static String medicalNotesIcon="images/medical_notes_icon.svg";
@@ -60,6 +60,7 @@ class AppImages{
   static String videoCall="images/video_call.svg";
   static String image="images/image.png";
   static String emoji="images/emoji.svg";
+  static String scheduleCancelIcon="images/schedule_cancel.svg";
 
 
 

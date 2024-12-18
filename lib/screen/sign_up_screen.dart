@@ -134,7 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                isPasswordField: true,
                // obscureText: _obscurePassword,
                 hintText: "Enter password..",
-                hintStyle:  TextStyle(
+                hintStyle:  const TextStyle(
                   decoration: TextDecoration.none,
                   color: AppColors.grey,
                   fontWeight: FontWeight.w300,
@@ -174,7 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                // obscureText: _obscurePassword,
                 isPasswordField: true,
                 hintText: "Confirm password..",
-                hintStyle:  TextStyle(
+                hintStyle:  const TextStyle(
                   color: AppColors.grey,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,

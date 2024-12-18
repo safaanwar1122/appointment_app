@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-
-import '../controllers/auth_provider.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_images.dart';
 import '../widgets/custome_text.dart';
@@ -23,6 +20,7 @@ class _StaticChatInboxScreenState extends State<StaticChatInboxScreen> {
   final ValueNotifier<List<String >> _messages=ValueNotifier<List<String>>([]);
 
 
+  @override
   void dispose() {
 
     _focusNode.dispose();
@@ -31,7 +29,7 @@ class _StaticChatInboxScreenState extends State<StaticChatInboxScreen> {
     super.dispose();
   }
 
-  void _sendMessage(){
+  void sendMessage(){
     if(_messageController.text.trim().isNotEmpty){
       _messages.value=[..._messages.value, _messageController.text.trim()];
       _messageController.clear();
@@ -133,14 +131,14 @@ class _StaticChatInboxScreenState extends State<StaticChatInboxScreen> {
             ListView.builder(
               itemCount: messages.length,
               shrinkWrap: true,
-              padding: EdgeInsets.only(top: 10, bottom: 10),
-              physics: NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 final message = messages[index];
                 Color containerColor =
                 message.messageType == 'sender' ? AppColors.ashBlue : AppColors.peach;
 
-                return ChatCard(
+                return chatCard(
                   msg: message.messageContent,
                   bg: containerColor,
                   messageType: message.messageType,
@@ -253,7 +251,7 @@ class _StaticChatInboxScreenState extends State<StaticChatInboxScreen> {
     );
   }
 
-  Widget ChatCard({
+  Widget chatCard({
     required String msg,
     required String messageType,
     required Color bg,

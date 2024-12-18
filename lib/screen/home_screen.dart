@@ -4,8 +4,11 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../utils/app_colors.dart';
 import '../widgets/custome_text.dart';
+import 'notifications_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -169,7 +172,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 //const SizedBox(width: 2),
                 //horizontalSpacer(-1),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(()=>const NotificationScreen());
+                  },
                   icon: SvgPicture.asset(
                     iconImage1,
                     fit: BoxFit.scaleDown,

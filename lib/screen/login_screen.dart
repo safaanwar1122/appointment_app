@@ -141,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 isPasswordField: true,
                 //obscureText: _obscurePassword,
                 hintText: "Enter password..",
-                hintStyle:  TextStyle(
+                hintStyle:  const TextStyle(
                   color: AppColors.grey,
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
