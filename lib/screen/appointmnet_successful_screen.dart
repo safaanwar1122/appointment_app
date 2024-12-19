@@ -21,44 +21,41 @@ class _AppointmentSuccessfulScreenState extends State<AppointmentSuccessfulScree
       backgroundColor: AppColors.blue,
       body: Stack(
         children: [
+          // Shade image at top-right corner
           Positioned(
             top: 0,
             right: 0,
             child: SvgPicture.asset(
               AppImages.shade2,
-              // width: 0.3.sw,
               fit: BoxFit.scaleDown,
             ),
           ),
-
+          // Main content
           Center(
-            child: SvgPicture.asset(
-              AppImages.confirmation,
-               height: 0.4.sh,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
 
-              fit: BoxFit.scaleDown,
-            ),
-          ),
-          verticalSpacer(70),
-          Padding(
-            padding:  EdgeInsets.symmetric(vertical: 30.h, horizontal:70.w ),
-            child: Stack(
-              children:[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    customText(
-                        text: 'Confirmation',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 40,
-                        color: AppColors.white),
-                    //verticalSpacer(100),
-                    appointmentSuccessfulCard(
+                SvgPicture.asset(
+                  AppImages.confirmation,
+                  height: 0.4.sh,
+                  fit: BoxFit.scaleDown,
+                ),
+                verticalSpacer(10),
 
-                        title: '',
-                        subTitle: '',
-                        iconImage: ''),
-                  ],
+
+                customText(
+                  text: 'Confirmation',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 40,
+                  color: AppColors.white,
+                ),
+                verticalSpacer(20),
+
+                appointmentSuccessfulCard(
+                  title: '',
+                  subTitle: '',
+                  iconImage: '',
                 ),
               ],
             ),
@@ -68,76 +65,67 @@ class _AppointmentSuccessfulScreenState extends State<AppointmentSuccessfulScree
     );
   }
 
-  Widget appointmentSuccessfulCard(
-      {
-        required String title,
-        required String subTitle,
-        required String iconImage}) {
+  Widget appointmentSuccessfulCard({
+    required String title,
+    required String subTitle,
+    required String iconImage,
+  }) {
     return Container(
       width: 256.w,
       height: 152.h,
       decoration: BoxDecoration(
-          color: AppColors.blue,
-          borderRadius: BorderRadius.circular(14.r),
-      border: Border.all(
-        color: AppColors.white,
-        width: 1.w,
-      ),
+        color: AppColors.blue,
+        borderRadius: BorderRadius.circular(14.r),
+        border: Border.all(
+          color: AppColors.white,
+          width: 1.w,
+        ),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            horizontalSpacer(12),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                customText(
-                  text: 'You have successfully booked an\n appointment with ',
-                  fontWeight: FontWeight.w300,
-                  fontSize: 16,
-                  color: AppColors.white,
-                ),
-                Center(
-                  child: customText(
-                    text: 'Dr. Ryan Joe',
-                    fontWeight: FontWeight.w800,
-                    fontSize: 20,
-                    color: AppColors.white,
-                  ),
-                ),
-              ],
+            customText(
+              text: 'You have successfully booked an\n appointment with ',
+              fontWeight: FontWeight.w300,
+              fontSize: 16,
+              color: AppColors.white,
             ),
-            verticalSpacer(10),
-
+            Center(
+              child: customText(
+                text: 'Dr. Ryan Joe',
+                fontWeight: FontWeight.w800,
+                fontSize: 20,
+                color: AppColors.white,
+              ),
+            ),
+            SizedBox(height: 10.h), // Spacing between text and details row
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-
                   children: [
-                    SvgPicture.asset(AppImages.time, fit: BoxFit.scaleDown,),
-                    horizontalSpacer(2),
+                    SvgPicture.asset(AppImages.time, fit: BoxFit.scaleDown),
+                    SizedBox(width: 2.w),
                     customText(
-                        text: 'Month 24, Year',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 13,
-                        color: AppColors.white),
+                      text: 'Month 24, Year',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 13,
+                      color: AppColors.white,
+                    ),
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SvgPicture.asset(AppImages.clock,fit: BoxFit.scaleDown,),
-                    horizontalSpacer(2),
+                    SvgPicture.asset(AppImages.clock, fit: BoxFit.scaleDown),
+                    SizedBox(width: 2.w),
                     customText(
-                        text: '10:00 AM',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 13,
-                        color: AppColors.white)
+                      text: '10:00 AM',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 13,
+                      color: AppColors.white,
+                    ),
                   ],
                 ),
               ],
