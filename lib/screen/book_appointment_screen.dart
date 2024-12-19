@@ -83,7 +83,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
         scrollDirection: Axis.vertical,
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.w),
+            padding: EdgeInsets.symmetric(horizontal: 40.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +136,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                   doctorName: 'Dr. Ryan Joe',
                   specialization: 'Neurologist',
                 ),
-                verticalSpacer(30),
+                verticalSpacer(40),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -170,7 +170,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     ),
                   ],
                 ),
-                verticalSpacer(10),
+                verticalSpacer(30),
                 customText(
                     text: 'About Me',
                     fontWeight: FontWeight.w500,
@@ -179,7 +179,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 RichReadMoreText.fromString(
                     text:
                         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    textStyle: TextStyle(color: AppColors.black),
+                    textStyle: TextStyle(color: AppColors.grey),
                     settings: LengthModeSettings(
                         trimLength: 90,
                         trimCollapsedText: 'Read More',
@@ -189,7 +189,8 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                         lessStyle: TextStyle(
                           color: Colors.red,
                         ),
-                        moreStyle: TextStyle(color: AppColors.blue))),
+                        moreStyle: TextStyle(color: AppColors.blue),),),
+                verticalSpacer(30),
                 customText(
                     text: 'Patient Details',
                     fontWeight: FontWeight.w500,
@@ -220,26 +221,23 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontSize: 16,
                     color: AppColors.black),
                 verticalSpacer(2),
-                Padding(
-                  padding: EdgeInsets.only(left: 20.w, top: 20.h, bottom: 20.h),
-                  child: Container(
-                    width: 327.w,
-                    height: 35.h,
-                    decoration: BoxDecoration(
-                      color: AppColors.lightLavender,
-                      borderRadius: BorderRadius.circular(10),
+                Container(
+                  width: 327.w,
+                  height: 35.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.lightLavender,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30.w,
+                      vertical: 10.h,
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 30.w,
-                        vertical: 10.h,
-                      ),
-                      child: customText(
-                          text: 'Safa Anwar',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                          color: AppColors.textColor),
-                    ),
+                    child: customText(
+                        text: 'Safa Anwar',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        color: AppColors.textColor),
                   ),
                 ),
                 verticalSpacer(10),
@@ -249,26 +247,23 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontSize: 16,
                     color: AppColors.black),
                 verticalSpacer(2),
-                Padding(
-                  padding: EdgeInsets.only(left: 20.w, top: 20.h, bottom: 20.h),
-                  child: Container(
-                    width: 327.w,
-                    height: 35.h,
-                    decoration: BoxDecoration(
-                      color: AppColors.lightLavender,
-                      borderRadius: BorderRadius.circular(10),
+                Container(
+                  width: 327.w,
+                  height: 35.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.lightLavender,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30.w,
+                      vertical: 10.h,
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 30.w,
-                        vertical: 10.h,
-                      ),
-                      child: customText(
-                          text: '40',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                          color: AppColors.textColor),
-                    ),
+                    child: customText(
+                        text: '40',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        color: AppColors.textColor),
                   ),
                 ),
                 verticalSpacer(20),
@@ -278,6 +273,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                     color: AppColors.black),
+                verticalSpacer(4),
                 ChangeNotifierProvider(
                   create: (_) => ContainerStateProvider(),
                   child: Row(
@@ -408,11 +404,13 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
             width: avatarRadius,
           ),
         ),
+        verticalSpacer(6),
         customText(
             text: record,
             fontWeight: FontWeight.w500,
             fontSize: 16,
             color: AppColors.black),
+        verticalSpacer(2),
         customText(
             text: title,
             fontWeight: FontWeight.w300,
@@ -469,11 +467,12 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
       builder: (context, containerColorProvider, child) {
         bool isSelected =
             containerColorProvider.selectedContainer == containerId;
-
         return GestureDetector(
           onTap: () => containerColorProvider.toggleSelection(containerId),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            width: 97.w,
+            height: 40.h,
+            padding: EdgeInsets.zero,
             decoration: BoxDecoration(
               color: isSelected ? AppColors.blue : AppColors.white,
               borderRadius: BorderRadius.circular(20),
@@ -487,6 +486,9 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                   fontSize: 12,
                   color: isSelected ? AppColors.white : AppColors.blue,
                 ),
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
