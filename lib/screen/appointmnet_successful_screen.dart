@@ -11,10 +11,12 @@ class AppointmentSuccessfulScreen extends StatefulWidget {
   const AppointmentSuccessfulScreen({super.key});
 
   @override
-  State<AppointmentSuccessfulScreen> createState() => _AppointmentSuccessfulScreenState();
+  State<AppointmentSuccessfulScreen> createState() =>
+      _AppointmentSuccessfulScreenState();
 }
 
-class _AppointmentSuccessfulScreenState extends State<AppointmentSuccessfulScreen> {
+class _AppointmentSuccessfulScreenState
+    extends State<AppointmentSuccessfulScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,27 +25,33 @@ class _AppointmentSuccessfulScreenState extends State<AppointmentSuccessfulScree
         children: [
           // Shade image at top-right corner
           Positioned(
-            top: 0,
+            top: 0.h,
             right: 0,
             child: SvgPicture.asset(
               AppImages.shade2,
               fit: BoxFit.scaleDown,
             ),
           ),
-          // Main content
+          Positioned(
+              top: 0.h,
+              left: 2.w,
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: AppColors.white,
+              )),
           Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-
-                SvgPicture.asset(
-                  AppImages.confirmation,
-                  height: 0.4.sh,
-                  fit: BoxFit.scaleDown,
+                Positioned(
+                  top: 10.h,
+                  child: SvgPicture.asset(
+                    AppImages.confirmation,
+                    // height: 0.3.sh,
+                    fit: BoxFit.scaleDown,
+                  ),
                 ),
                 verticalSpacer(10),
-
-
                 customText(
                   text: 'Confirmation',
                   fontWeight: FontWeight.w600,
@@ -51,7 +59,6 @@ class _AppointmentSuccessfulScreenState extends State<AppointmentSuccessfulScree
                   color: AppColors.white,
                 ),
                 verticalSpacer(20),
-
                 appointmentSuccessfulCard(
                   title: '',
                   subTitle: '',
@@ -86,12 +93,31 @@ class _AppointmentSuccessfulScreenState extends State<AppointmentSuccessfulScree
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            customText(
-              text: 'You have successfully booked an\n appointment with ',
-              fontWeight: FontWeight.w300,
-              fontSize: 16,
-              color: AppColors.white,
+            Center(
+              child: Text.rich(
+                TextSpan(
+                    children: [
+                  TextSpan(
+                    text: 'You have successfully booked an\n',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.sp,
+                      color: AppColors.white,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'appointment with',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.sp,
+                      color: AppColors.white,
+                    ),
+                  ),
+                ]),
+                textAlign: TextAlign.center,
+              ),
             ),
+            verticalSpacer(10),
             Center(
               child: customText(
                 text: 'Dr. Ryan Joe',
@@ -100,7 +126,7 @@ class _AppointmentSuccessfulScreenState extends State<AppointmentSuccessfulScree
                 color: AppColors.white,
               ),
             ),
-            SizedBox(height: 10.h), // Spacing between text and details row
+            verticalSpacer(10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
