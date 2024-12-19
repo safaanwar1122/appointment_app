@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:provider/provider.dart';
 import 'package:rich_readmore/rich_readmore.dart';
 
+import '../controllers/container_state_provider.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_constants.dart';
 import '../utils/app_images.dart';
@@ -19,6 +21,7 @@ class AppointmentDetailsScreen extends StatefulWidget {
 }
 
 class _AppointmentDetailsScreenState extends State<AppointmentDetailsScreen> {
+
   @override
   Widget build(BuildContext context) {
 
@@ -318,4 +321,5 @@ required String location,
     ],
     );
 }
+
 }

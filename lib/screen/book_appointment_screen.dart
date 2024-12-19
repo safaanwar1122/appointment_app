@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:rich_readmore/rich_readmore.dart';
 
+import '../controllers/container_state_provider.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_constants.dart';
 import '../widgets/custome_text.dart';
@@ -20,9 +22,12 @@ class BookAppointmentScreen extends StatefulWidget {
 }
 
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
+  var containerColorProvider;
   @override
   Widget build(BuildContext context) {
-
+    void iniState(){
+      containerColorProvider=Provider.of<ContainerStateProvider>(context);
+    }
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -136,6 +141,24 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                     color: AppColors.blue),
+                verticalSpacer(10),
+                ChangeNotifierProvider(create: (_)=>ContainerStateProvider(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    containerColorState(
+                      containerId: "yourself", // Unique identifier
+                      text: "Yourself",
+                    ),
+                    SizedBox(width: 10), // Spacing between containers
+                    containerColorState(
+                      containerId: "anotherPerson", // Unique identifier
+                      text: "Another Person",
+                    ),
+                  ],
+                ),
+                ),
+
                 customButton(
                     label: 'Make Appointment',
                     onPressed: (){
@@ -222,6 +245,38 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
           ],
         ),
       ),
+    );
+  }
+  Widget containerColorState({
+    required String containerId, // Unique identifier for this container
+    required String text,
+  }) {
+    return Consumer<ContainerStateProvider>(
+      builder: (context, containerColorProvider, child) {
+        bool isSelected = containerColorProvider.selectedContainer == containerId;
+
+        return GestureDetector(
+          onTap: () => containerColorProvider.toggleSelection(containerId),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            decoration: BoxDecoration(
+              color: isSelected ? AppColors.blue : AppColors.white,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: AppColors.blue),
+            ),
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  fontSize: 12,
+                  color: isSelected ? AppColors.white : AppColors.blue,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
