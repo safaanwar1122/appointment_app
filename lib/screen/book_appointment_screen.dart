@@ -1,6 +1,8 @@
+import 'package:appointment_app/controllers/text_field_provider.dart';
 import 'package:appointment_app/screen/appointmnet_successful_screen.dart';
 import 'package:appointment_app/utils/app_images.dart';
 import 'package:appointment_app/widgets/custom_button.dart';
+import 'package:appointment_app/widgets/custom_text_field.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +25,7 @@ class BookAppointmentScreen extends StatefulWidget {
 
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   var containerColorProvider;
+  final TextEditingController controller=TextEditingController();
   List<DateTime?> _singleDatePickerValueWithDefaultValue=[
     DateTime.now().add(const Duration(days: 1)),
   ];
@@ -309,7 +312,8 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontSize: 16,
                     color: AppColors.black),
                 verticalSpacer(10),
-                Padding(
+                ChangeNotifierProvider(create: (_)=>TextFieldProvider(),
+                child: Padding(
                   padding: EdgeInsets.only(left: 20.w, top: 20.h, bottom: 20.h),
                   child: Container(
                     width: 315.w,
@@ -327,14 +331,34 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                         horizontal: 30.w,
                         vertical: 10.h,
                       ),
-                      child: customText(
-                          text: 'Enter Your Problem Here...',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                          color: AppColors.black),
+                      child: Consumer<TextFieldProvider>(
+
+                          builder: (context,textFieldProvider,child){
+                            return TextFormField(
+                                controller: controller,
+
+
+                                style: const TextStyle(
+                                decoration: TextDecoration.none,
+                                fontSize: 14,
+                                color: AppColors.black,
+                            ),
+                            decoration: const InputDecoration(
+                            hintText: "Enter Your Problem Here...",
+                            hintStyle: TextStyle(
+                            fontSize: 14,
+                            color: AppColors.black,
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.zero,
+                            ));
+
+                          })
                     ),
                   ),
                 ),
+                ),
+                
                 verticalSpacer(10),
                 Container(
                   width: double.infinity,
@@ -346,7 +370,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     text: 'Select Day',
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
-                    color: AppColors.black),
+                    color: AppColors.blue),
                 verticalSpacer(10),
                 Container(
                   width: 407.w,
@@ -366,7 +390,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     text: 'Available Time',
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
-                    color: AppColors.black),
+                    color: AppColors.blue),
                 verticalSpacer(10),
               availableTime(time: '', ),
 
@@ -377,7 +401,8 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                       Get.to(() => const AppointmentSuccessfulScreen());
                     },
                     buttonColor: AppColors.blue,
-                    textColor: AppColors.white)
+                    textColor: AppColors.white),
+                verticalSpacer(50),
               ],
             ),
           ),
