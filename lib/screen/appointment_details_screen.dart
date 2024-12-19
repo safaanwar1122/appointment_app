@@ -76,11 +76,42 @@ class _AppointmentDetailsScreenState extends State<AppointmentDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(AppImages.image,fit: BoxFit.cover,),
+                Stack(
+                  children: [
+                    Image.asset(AppImages.image,fit: BoxFit.cover,),
+                    Positioned(
+                      top: 10.h,
+                      right: 10,
+                      child: Center(
+                        child: Container(
+                          width: 70.w,
+                          height: 30.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.ashBlue,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(AppImages.starIcon),
+                              horizontalSpacer(4),
+                              customText(
+                                  text: '4.9',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                  color: AppColors.black)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 doctorOverviewCard(
                   doctorName: 'Dr. John Doe',
                   specialization: 'Cardiologist', location:'London, United Kingdom',
                 ),
+
                 verticalSpacer(30),
                 customText(
                     text: 'Schedule Appointment',
