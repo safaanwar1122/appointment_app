@@ -1,5 +1,6 @@
 import 'package:appointment_app/utils/app_images.dart';
 import 'package:appointment_app/widgets/custom_button.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,6 +24,53 @@ class BookAppointmentScreen extends StatefulWidget {
 
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   var containerColorProvider;
+  List<DateTime?> _singleDatePickerValueWithDefaultValue=[
+    DateTime.now().add(const Duration(days: 1)),
+  ];
+  final config=CalendarDatePicker2Config(
+    calendarViewMode: CalendarDatePicker2Mode.scroll,
+    selectedDayHighlightColor: AppColors.blue,
+    weekdayLabels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+    weekdayLabelTextStyle: TextStyle(
+      color: AppColors.blue.withOpacity(0.2),
+      fontWeight: FontWeight.w300,
+      fontSize: 12,
+    ),
+    firstDayOfWeek: 1,
+    controlsHeight: 50,
+    dayMaxWidth: 25,
+    controlsTextStyle: TextStyle(
+      color: AppColors.black,
+      fontSize: 15,
+      fontWeight: FontWeight.bold,
+    ),
+    dayTextStyle: const TextStyle(
+      color: Colors.amber,
+      fontWeight: FontWeight.bold,
+    ),
+    disabledDayTextStyle: const TextStyle(
+      color: Colors.grey,
+    ),
+    modePickersGap: 0,
+    modePickerTextHandler: ({required monthDate, isMonthPicker}) {
+      if (isMonthPicker ?? false) {
+        // Custom month picker text
+        return '${getLocaleShortMonthFormat(const Locale('en')).format(monthDate)} C';
+      }
+
+      return null;
+    },
+    firstDate: DateTime(DateTime.now().year - 2, DateTime.now().month - 1,
+        DateTime.now().day - 5),
+    lastDate: DateTime(DateTime.now().year + 3, DateTime.now().month + 2,
+        DateTime.now().day + 10),
+    selectableDayPredicate: (day) =>
+    !day
+        .difference(DateTime.now().add(const Duration(days: 3)))
+        .isNegative &&
+        day.isBefore(DateTime.now().add(const Duration(days: 30))),
+
+  );
   @override
   Widget build(BuildContext context) {
     void iniState() {
@@ -306,6 +354,20 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                     color: AppColors.black),
+                verticalSpacer(10),
+                Container(
+                  width: 407.w,
+                  height: 260.h,
+                  color: AppColors.lavender,
+                  child:CalendarDatePicker2(
+                    displayedMonthDate: _singleDatePickerValueWithDefaultValue.first,
+                    config: config,
+                    value: _singleDatePickerValueWithDefaultValue,
+                    onValueChanged: (dates) => setState(
+                            () => _singleDatePickerValueWithDefaultValue = dates),
+                  ),
+
+                ),
                 verticalSpacer(10),
                 customText(
                     text: 'Available Time',
