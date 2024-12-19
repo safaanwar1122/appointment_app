@@ -25,9 +25,10 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   var containerColorProvider;
   @override
   Widget build(BuildContext context) {
-    void iniState(){
-      containerColorProvider=Provider.of<ContainerStateProvider>(context);
+    void iniState() {
+      containerColorProvider = Provider.of<ContainerStateProvider>(context);
     }
+
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -77,46 +78,53 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
         scrollDirection: Axis.vertical,
         child: SafeArea(
           child: Padding(
-            padding:   EdgeInsets.symmetric(horizontal: 18.w),
+            padding: EdgeInsets.symmetric(horizontal: 18.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(AppImages.image,fit: BoxFit.cover,),
+                Image.asset(
+                  AppImages.image,
+                  fit: BoxFit.cover,
+                ),
                 doctorOverviewCard(
-                    doctorName: 'Dr. Ryan Joe',
-                    specialization: 'Neurologist',
-                   ),
-          verticalSpacer(30),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              doctorProfileCard(
-                  avatarRadius: 20.r,
-                  imagePath: AppImages.patientsIcon,
-                  title: 'Patients',
-                  record:'120+',
-                  bg: AppColors.lightGrey.withOpacity(0.2),),
-              doctorProfileCard(
-                  avatarRadius: 20.r,
-                  imagePath: AppImages.yearsExpIcon,
-                  title: 'Years Exp',
-                  record: '7+',
-                bg: AppColors.lightGrey.withOpacity(0.2),),
-              doctorProfileCard(
-                  avatarRadius: 20.r,
-                  imagePath: AppImages.ratingIcon,
-                  title: 'Rating',
-                  record: '4.9',
-                bg: AppColors.lightGrey.withOpacity(0.2),),
-              doctorProfileCard(
-                  avatarRadius: 20.r,
-                  imagePath: AppImages.reviewsIcon,
-                  title: 'Reviews',
-                  record: '100+',
-                bg: AppColors.lightGrey.withOpacity(0.2),),
-            ],
-          ),
+                  doctorName: 'Dr. Ryan Joe',
+                  specialization: 'Neurologist',
+                ),
+                verticalSpacer(30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    doctorProfileCard(
+                      avatarRadius: 20.r,
+                      imagePath: AppImages.patientsIcon,
+                      title: 'Patients',
+                      record: '120+',
+                      bg: AppColors.lightGrey.withOpacity(0.2),
+                    ),
+                    doctorProfileCard(
+                      avatarRadius: 20.r,
+                      imagePath: AppImages.yearsExpIcon,
+                      title: 'Years Exp',
+                      record: '7+',
+                      bg: AppColors.lightGrey.withOpacity(0.2),
+                    ),
+                    doctorProfileCard(
+                      avatarRadius: 20.r,
+                      imagePath: AppImages.ratingIcon,
+                      title: 'Rating',
+                      record: '4.9',
+                      bg: AppColors.lightGrey.withOpacity(0.2),
+                    ),
+                    doctorProfileCard(
+                      avatarRadius: 20.r,
+                      imagePath: AppImages.reviewsIcon,
+                      title: 'Reviews',
+                      record: '100+',
+                      bg: AppColors.lightGrey.withOpacity(0.2),
+                    ),
+                  ],
+                ),
                 verticalSpacer(10),
                 customText(
                     text: 'About Me',
@@ -124,45 +132,194 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontSize: 16,
                     color: AppColors.black),
                 RichReadMoreText.fromString(
-                    text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." ,
+                    text:
+                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     textStyle: TextStyle(color: AppColors.black),
-                    settings: LengthModeSettings(trimLength: 90,
-                    trimCollapsedText: 'Read More',
-                      trimExpandedText: 'Read Less',
-                      onPressReadMore: (){
-
-                      },
-                      onPressReadLess: (){},
-                      lessStyle: TextStyle(color:Colors.red, ),
-                      moreStyle: TextStyle(color:  AppColors.blue)
-                    )),
+                    settings: LengthModeSettings(
+                        trimLength: 90,
+                        trimCollapsedText: 'Read More',
+                        trimExpandedText: 'Read Less',
+                        onPressReadMore: () {},
+                        onPressReadLess: () {},
+                        lessStyle: TextStyle(
+                          color: Colors.red,
+                        ),
+                        moreStyle: TextStyle(color: AppColors.blue))),
                 customText(
                     text: 'Patient Details',
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                     color: AppColors.blue),
                 verticalSpacer(10),
-                ChangeNotifierProvider(create: (_)=>ContainerStateProvider(),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    containerColorState(
-                      containerId: "yourself", // Unique identifier
-                      text: "Yourself",
-                    ),
-                    SizedBox(width: 10), // Spacing between containers
-                    containerColorState(
-                      containerId: "anotherPerson", // Unique identifier
-                      text: "Another Person",
-                    ),
-                  ],
+                ChangeNotifierProvider(
+                  create: (_) => ContainerStateProvider(),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      containerColorState(
+                        containerId: "yourself", // Unique identifier
+                        text: "Yourself",
+                      ),
+                      SizedBox(width: 10), // Spacing between containers
+                      containerColorState(
+                        containerId: "anotherPerson", // Unique identifier
+                        text: "Another Person",
+                      ),
+                    ],
+                  ),
                 ),
+                verticalSpacer(10),
+                customText(
+                    text: 'Full Name',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.black),
+                verticalSpacer(2),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w, top: 20.h, bottom: 20.h),
+                  child: Container(
+                    width: 327.w,
+                    height: 35.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.lightLavender,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 30.w,
+                        vertical: 10.h,
+                      ),
+                      child: customText(
+                          text: 'Safa Anwar',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          color: AppColors.textColor),
+                    ),
+                  ),
                 ),
+                verticalSpacer(10),
+                customText(
+                    text: 'Age',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.black),
+                verticalSpacer(2),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w, top: 20.h, bottom: 20.h),
+                  child: Container(
+                    width: 327.w,
+                    height: 35.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.lightLavender,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 30.w,
+                        vertical: 10.h,
+                      ),
+                      child: customText(
+                          text: '40',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          color: AppColors.textColor),
+                    ),
+                  ),
+                ),
+                verticalSpacer(20),
+                verticalSpacer(10),
+                customText(
+                    text: 'Gender',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.black),
+                ChangeNotifierProvider(
+                  create: (_) => ContainerStateProvider(),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      containerColorState(
+                        containerId: "male", // Unique identifier
+                        text: "Male",
+                      ),
+                      horizontalSpacer(10), // Spacing between containers
+                      containerColorState(
+                        containerId: "female", // Unique identifier
+                        text: "Female",
+                      ),
+                      horizontalSpacer(10), // Spacing between containers
+                      containerColorState(
+                        containerId: "other", // Unique identifier
+                        text: "Other",
+                      ),
+                    ],
+                  ),
+                ),
+                verticalSpacer(10),
+                Container(
+                  width: double.infinity,
+                  height: 1.h,
+                  color: AppColors.blue,
+                ),
+                verticalSpacer(10),
+                customText(
+                    text: 'Describe your problem',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.black),
+                verticalSpacer(10),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w, top: 20.h, bottom: 20.h),
+                  child: Container(
+                    width: 315.w,
+                    height: 107.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: AppColors.blue.withOpacity(0.2),
+                        width: 1.w,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 30.w,
+                        vertical: 10.h,
+                      ),
+                      child: customText(
+                          text: 'Enter Your Problem Here...',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          color: AppColors.black),
+                    ),
+                  ),
+                ),
+                verticalSpacer(10),
+                Container(
+                  width: double.infinity,
+                  height: 1.h,
+                  color: AppColors.blue,
+                ),
+                verticalSpacer(10),
+                customText(
+                    text: 'Select Day',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.black),
+                verticalSpacer(10),
+                customText(
+                    text: 'Available Time',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.black),
+                verticalSpacer(10),
+              availableTime(time: '', ),
 
+                verticalSpacer(80),
                 customButton(
                     label: 'Make Appointment',
-                    onPressed: (){
-                      Get.to(()=>const AppointmentDetailsScreen());
+                    onPressed: () {
+                      Get.to(() => const AppointmentDetailsScreen());
                     },
                     buttonColor: AppColors.blue,
                     textColor: AppColors.white)
@@ -173,6 +330,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
       ),
     );
   }
+
   Widget doctorProfileCard(
       {required double avatarRadius,
       required String imagePath,
@@ -208,30 +366,26 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   Widget doctorOverviewCard({
     required String doctorName,
     required String specialization,
-
   }) {
     return Container(
       width: 318.w,
       height: 82.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
-        color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.grey.withOpacity(0.1),
-            //spreadRadius: 1.r,
-            blurRadius: 1,
-            offset: const Offset(0, 1),
-          ),
-        ]
-      ),
-
+          borderRadius: BorderRadius.circular(10.r),
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.grey.withOpacity(0.1),
+              //spreadRadius: 1.r,
+              blurRadius: 1,
+              offset: const Offset(0, 1),
+            ),
+          ]),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             customText(
                 text: doctorName,
                 fontWeight: FontWeight.w600,
@@ -247,13 +401,15 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
       ),
     );
   }
+
   Widget containerColorState({
     required String containerId, // Unique identifier for this container
     required String text,
   }) {
     return Consumer<ContainerStateProvider>(
       builder: (context, containerColorProvider, child) {
-        bool isSelected = containerColorProvider.selectedContainer == containerId;
+        bool isSelected =
+            containerColorProvider.selectedContainer == containerId;
 
         return GestureDetector(
           onTap: () => containerColorProvider.toggleSelection(containerId),
@@ -277,6 +433,267 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
           ),
         );
       },
+    );
+  }
+
+  Widget availableTime({
+    required String time,
+     Color? bg,
+  }) {
+    return  Column(
+      children: [
+        Row(
+          children: [
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text: '9:00 AM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.blue),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '9:30 AM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.blue),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '10:00 AM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.white),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text: '19:30 AM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.blue),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '11:00 AM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.blue),
+              ),
+            ),
+          ],
+        ),
+        verticalSpacer(6),
+        Row(
+          children: [
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '11:30 AM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.black),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '12:00 AM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.blue),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text: '12:30 AM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.blue),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '1:00 PM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.black),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '1:30 PM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.black),
+              ),
+            ),
+          ],
+        ),
+        verticalSpacer(6),
+        Row(
+          children: [
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '2:00 PM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.blue),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '2:30 PM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.black),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color:AppColors.blue.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '3:00 PM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.black),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text:  '3:30 PM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.blue),
+              ),
+            ),
+            horizontalSpacer(2),
+            Container(
+              width: 55.w,
+              height: 24.h,
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: customText(
+                    text: '4:00 PM ',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.blue),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

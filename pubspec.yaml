@@ -42,6 +42,7 @@ dependencies:
   dotted_line: ^3.2.3
   provider: ^6.0.0
   rich_readmore: ^1.1.1
+  calendar_date_picker2: ^1.1.8
   #dotted_line_flutter: ^0.1.6
 
 dev_dependencies:

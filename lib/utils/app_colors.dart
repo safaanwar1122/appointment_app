@@ -18,4 +18,10 @@ class AppColors {
   static const lavender = Color(0xFFCAD6FF);
   static const lightOrange = Color(0xFFFFE28D);
   static const darkPurple = Color(0xFF4C4DDC);
+
+  static const lightLavender = Color(0xFFECF1FF);
+
+  static const textColor = Color(0xFF809CFF);
+
+
 }
