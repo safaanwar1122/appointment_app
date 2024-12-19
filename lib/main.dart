@@ -1,6 +1,7 @@
 import 'package:appointment_app/controllers/auth_provider.dart';
 import 'package:appointment_app/screen/appointmnet_screen.dart';
 import 'package:appointment_app/screen/book_appointment_screen.dart';
+import 'package:appointment_app/screen/calender_page.dart';
 import 'package:appointment_app/screen/dynamic_chat_screen.dart';
 import 'package:appointment_app/screen/static_chat_inbox_screen.dart';
 import 'package:appointment_app/screen/spalsh_screen.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               // home: BookAppointmentScreen(),
               home: SplashScreen(),
+             // home: CalendarPage(),
             );
           },
         ),

@@ -1,3 +1,4 @@
+import 'package:appointment_app/screen/appointmnet_successful_screen.dart';
 import 'package:appointment_app/utils/app_images.dart';
 import 'package:appointment_app/widgets/custom_button.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
@@ -7,14 +8,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:rich_readmore/rich_readmore.dart';
-
 import '../controllers/container_state_provider.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_constants.dart';
 import '../widgets/custome_text.dart';
 import '../widgets/spacer.dart';
 import 'appointment_details_screen.dart';
-import 'appointmnet_successful_screen.dart';
 
 class BookAppointmentScreen extends StatefulWidget {
   const BookAppointmentScreen({super.key});
@@ -79,49 +78,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: AppColors.white,
-        title: Padding(
-          padding: EdgeInsets.only(
-              left: 15.w, right: 125.w, top: 23.h, bottom: 10.h),
-          child: Column(
-            children: [
-              verticalSpacer(10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: CircleAvatar(
-                      radius: 16,
-                      backgroundColor: AppColors.blue.withOpacity(.1),
-                      child: Container(
-                        width: 40.w,
-                        height: 40.h,
-                        child:
-                            const Icon(Icons.arrow_back, color: AppColors.blue),
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: customText(
-                      text: AppConstants.bookAppointments,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      color: AppColors.black,
-                      lineHeight: null,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: null,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SafeArea(
@@ -131,6 +88,46 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 23.h, bottom: 10.h),
+                  child: Column(
+                    children: [
+                      verticalSpacer(10),
+                      Row(
+                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: CircleAvatar(
+                              radius: 16,
+                              backgroundColor: AppColors.blue.withOpacity(.1),
+                              child: Container(
+                                width: 40.w,
+                                height: 40.h,
+                                child:
+                                const Icon(Icons.arrow_back, color: AppColors.blue),
+                              ),
+                            ),
+                          ),
+                          horizontalSpacer(50),
+                          Center(
+                            child: customText(
+                              text: AppConstants.bookAppointments,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: AppColors.black,
+                              lineHeight: null,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 Image.asset(
                   AppImages.image,
                   fit: BoxFit.cover,
@@ -381,7 +378,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 customButton(
                     label: 'Make Appointment',
                     onPressed: () {
-                      Get.to(() => const AppointmentDetailsScreen());
+                      Get.to(() => const AppointmentSuccessfulScreen());
                     },
                     buttonColor: AppColors.blue,
                     textColor: AppColors.white)

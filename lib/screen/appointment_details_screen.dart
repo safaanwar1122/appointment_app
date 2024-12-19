@@ -27,58 +27,57 @@ class _AppointmentDetailsScreenState extends State<AppointmentDetailsScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: AppColors.white,
-        title: Padding(
-          padding: EdgeInsets.only(
-              left: 15.w, right: 125.w, top: 23.h, bottom: 10.h),
-          child: Column(
-            children: [
-              verticalSpacer(10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: CircleAvatar(
-                      radius: 16,
-                      backgroundColor: AppColors.blue.withOpacity(.1),
-                      child: Container(
-                        width: 40.w,
-                        height: 40.h,
-                        child:
-                        const Icon(Icons.arrow_back, color: AppColors.blue),
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: customText(
-                      text: AppConstants.bookAppointments,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      color: AppColors.black,
-                      lineHeight: null,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+     appBar: null,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SafeArea(
           child: Padding(
-            padding:   EdgeInsets.symmetric(horizontal: 18.w),
+            padding:   EdgeInsets.symmetric(horizontal: 40.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 23.h, bottom: 10.h),
+                  child: Column(
+                    children: [
+                      verticalSpacer(10),
+                      Row(
+                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: CircleAvatar(
+                              radius: 16,
+                              backgroundColor: AppColors.blue.withOpacity(.1),
+                              child: Container(
+                                width: 40.w,
+                                height: 40.h,
+                                child:
+                                const Icon(Icons.arrow_back, color: AppColors.blue),
+                              ),
+                            ),
+                          ),
+                          horizontalSpacer(50),
+                          Center(
+                            child: customText(
+                              text: AppConstants.appointmentDetails,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: AppColors.black,
+                              lineHeight: null,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                verticalSpacer(20),
                 Stack(
                   children: [
                     Image.asset(AppImages.image,fit: BoxFit.cover,),
