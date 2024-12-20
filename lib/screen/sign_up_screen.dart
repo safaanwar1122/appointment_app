@@ -1,18 +1,5 @@
 
-import 'package:appointment_app/screen/user_data_screen.dart';
-import 'package:appointment_app/utils/app_images.dart';
-import 'package:appointment_app/widgets/spacer.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_constants.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_text_field.dart';
-import '../widgets/custome_text.dart';
-
+import 'package:appointment_app/export.dart';
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 

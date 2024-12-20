@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+import 'package:appointment_app/export.dart';
 Widget customRowText({
   required String initialText,
   required TextStyle initialTextStyle,

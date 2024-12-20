@@ -1,14 +1,4 @@
-import 'package:appointment_app/utils/app_images.dart';
-import 'package:appointment_app/widgets/spacer.dart';
-import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import '../utils/app_colors.dart';
-import '../widgets/custome_text.dart';
-import 'notifications_screen.dart';
+import 'package:appointment_app/export.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

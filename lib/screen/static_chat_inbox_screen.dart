@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_images.dart';
-import '../widgets/custome_text.dart';
-import '../widgets/spacer.dart';
+import 'package:appointment_app/export.dart';
 
 class StaticChatInboxScreen extends StatefulWidget {
   const StaticChatInboxScreen({super.key});

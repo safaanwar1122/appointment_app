@@ -1,18 +1,4 @@
-import 'package:appointment_app/controllers/auth_provider.dart';
-import 'package:appointment_app/screen/sign_up_screen.dart';
-import 'package:appointment_app/utils/app_images.dart';
-import 'package:appointment_app/widgets/spacer.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_constants.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_text_field.dart';
-import '../widgets/custome_text.dart';
+import 'package:appointment_app/export.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

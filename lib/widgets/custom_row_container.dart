@@ -1,8 +1,4 @@
-import 'package:appointment_app/utils/app_colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:appointment_app/export.dart';
 Widget customRowContainer({
   required String assetImagePath,
   required String text,

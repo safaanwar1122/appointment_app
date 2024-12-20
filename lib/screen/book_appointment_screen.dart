@@ -1,22 +1,6 @@
-import 'package:appointment_app/controllers/text_field_provider.dart';
-import 'package:appointment_app/screen/appointmnet_successful_screen.dart';
-import 'package:appointment_app/utils/app_images.dart';
-import 'package:appointment_app/widgets/custom_button.dart';
-import 'package:appointment_app/widgets/custom_text_field.dart';
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'package:rich_readmore/rich_readmore.dart';
-import '../controllers/container_state_provider.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_constants.dart';
-import '../widgets/custome_text.dart';
-import '../widgets/spacer.dart';
-import 'appointment_details_screen.dart';
 
+import 'package:appointment_app/export.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 class BookAppointmentScreen extends StatefulWidget {
   const BookAppointmentScreen({super.key});
   @override

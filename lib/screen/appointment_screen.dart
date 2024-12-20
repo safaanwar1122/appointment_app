@@ -1,13 +1,4 @@
-import 'package:appointment_app/utils/app_colors.dart';
-import 'package:appointment_app/utils/app_images.dart';
-import 'package:appointment_app/widgets/custome_text.dart';
-import 'package:appointment_app/widgets/spacer.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import '../utils/app_constants.dart';
-import 'book_appointment_screen.dart';
+import 'package:appointment_app/export.dart';
 
 class AppointmentScreen extends StatefulWidget {
   const AppointmentScreen({super.key});

@@ -1,15 +1,5 @@
-import 'package:appointment_app/screen/dynamic_chat_screen.dart';
-import 'package:appointment_app/utils/app_colors.dart';
-import 'package:appointment_app/utils/app_images.dart';
-import 'package:appointment_app/widgets/custome_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
-
-import '../utils/app_constants.dart';
-import '../widgets/spacer.dart';
-
+import 'package:appointment_app/export.dart';
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
 

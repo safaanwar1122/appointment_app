@@ -1,17 +1,4 @@
-import 'package:appointment_app/screen/video_call_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-
-import '../controllers/auth_provider.dart';
-import '../controllers/chat_provider.dart';
-import '../models/chat_message_model.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_images.dart';
-import '../widgets/custome_text.dart';
-import '../widgets/spacer.dart';
+import 'package:appointment_app/export.dart';
 
 class DynamicChatScreen extends StatefulWidget {
   const DynamicChatScreen({super.key});

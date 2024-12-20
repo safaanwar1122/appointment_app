@@ -1,12 +1,4 @@
-import 'package:appointment_app/widgets/custome_text.dart';
-import 'package:appointment_app/widgets/spacer.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../utils/app_colors.dart';
-import '../utils/app_images.dart';
-
+import 'package:appointment_app/export.dart';
 class AppointmentSuccessfulScreen extends StatefulWidget {
   const AppointmentSuccessfulScreen({super.key});
 

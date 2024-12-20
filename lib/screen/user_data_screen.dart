@@ -1,16 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_constants.dart';
-import '../utils/app_images.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_text_field.dart';
-import '../widgets/custome_text.dart';
-import '../widgets/spacer.dart';
-import 'host_screen.dart';
-
+import 'package:appointment_app/export.dart';
 class UserDataScreen extends StatefulWidget {
   const UserDataScreen({super.key});
 
