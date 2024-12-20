@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
                 ),
               ),
               debugShowCheckedModeBanner: false,
-              // home: BookAppointmentScreen(),
-              home: SplashScreen(),
+               home: BookAppointmentScreen(),
+             // home: SplashScreen(),
              // home: CalendarPage(),
             );
           },

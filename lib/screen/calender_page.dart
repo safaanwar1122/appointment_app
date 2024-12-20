@@ -1,100 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:table_calendar/table_calendar.dart';
 
-import '../utils/app_colors.dart'; // For responsive sizing
+import '../utils/app_colors.dart';
 
-// Assuming AppColors is defined elsewhere in your code
-// Example:
-// AppColors.blue = Colors.blue;
-// AppColors.lavender = Colors.lavender;
-// AppColors.white = Colors.white;
-
-class CalendarPage extends StatefulWidget {
+class CustomDatePicker extends StatefulWidget {
   @override
-  _CalendarPageState createState() => _CalendarPageState();
+  _CustomDatePickerState createState() => _CustomDatePickerState();
 }
 
-class _CalendarPageState extends State<CalendarPage> {
-  var containerColorProvider;
-  List<DateTime?> _singleDatePickerValueWithDefaultValue = [
-    DateTime.now().add(const Duration(days: 1)),
-  ];
+class _CustomDatePickerState extends State<CustomDatePicker> {
+  late DateTime _selectedDay;
+  late DateTime _focusedDay;
 
-  final config = CalendarDatePicker2Config(
-    calendarViewMode: CalendarDatePicker2Mode.scroll,
-    selectedDayHighlightColor: Colors.blue,
-   // weekdayLabels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
-    weekdayLabelTextStyle: TextStyle(
-      color: Colors.black, // White text for weekday labels
-      fontWeight: FontWeight.bold,
-      fontSize: 12,
-    ),
-    firstDayOfWeek: 1, // Starting from Monday
-    controlsHeight: 50,
-    dayMaxWidth: 25,
-    controlsTextStyle: TextStyle(
-      color: Colors.black,
-      fontSize: 15,
-      fontWeight: FontWeight.bold,
-    ),
-    dayTextStyle: const TextStyle(
-
-      color: Colors.amber,
-      fontWeight: FontWeight.bold,
-    ),
-    disabledDayTextStyle: const TextStyle(
-      color: Colors.grey,
-    ),
-    modePickersGap: 0,
-    modePickerTextHandler: ({required monthDate, isMonthPicker}) {
-      if (isMonthPicker ?? false) {
-        return '${getLocaleShortMonthFormat(const Locale('en')).format(monthDate)} C';
-      }
-      return null;
-    },
-    firstDate: DateTime(DateTime.now().year - 2, DateTime.now().month - 1,
-        DateTime.now().day - 5),
-    lastDate: DateTime(DateTime.now().year + 3, DateTime.now().month + 2,
-        DateTime.now().day + 10),
-    selectableDayPredicate: (day) =>
-    !day
-        .difference(DateTime.now().add(const Duration(days: 3)))
-        .isNegative &&
-        day.isBefore(DateTime.now().add(const Duration(days: 30))),
-  );
+  @override
+  void initState() {
+    super.initState();
+    _selectedDay = DateTime.now();
+    _focusedDay = DateTime.now();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          width: 407.w, // Responsive width
-          height: 260.h, // Responsive height
-          color: AppColors.lavender, // Outer container with lavender background
-          child: Padding(
-            padding: EdgeInsets.all(10.w), // Padding for inner container
+      appBar: null,
+      body: Column(
+        children: [
+          // Lavender Container wrapping the calendar
+          Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Container(
-              width: 299.w,
-              height: 165.h,
               decoration: BoxDecoration(
-              //  color: Colors.blue, // Set the background color
-                color: Colors.white, // White background for the calendar container
-                borderRadius: BorderRadius.circular(20), // Set the rounded corners
+                color: Colors.white, // White color for the calendar
+                borderRadius: BorderRadius.all(Radius.circular(16)), // Rounded corners
               ),
-
-              child: CalendarDatePicker2(
-                displayedMonthDate:
-                _singleDatePickerValueWithDefaultValue.first,
-                config: config,
-                value: _singleDatePickerValueWithDefaultValue,
-                onValueChanged: (dates) => setState(() {
-                  _singleDatePickerValueWithDefaultValue = dates;
-                }),
+              child: TableCalendar(
+                firstDay: DateTime(2020),
+                lastDay: DateTime(2025),
+                focusedDay: _focusedDay,
+                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                onDaySelected: (selectedDay, focusedDay) {
+                  setState(() {
+                    _selectedDay = selectedDay;
+                    _focusedDay = focusedDay;
+                  });
+                },
+                calendarStyle: CalendarStyle(
+                  todayDecoration: BoxDecoration(
+                    color: Colors.blue,
+                    shape: BoxShape.circle,
+                  ),
+                  selectedDecoration: BoxDecoration(
+                    color: Colors.orange, // Default selected color
+                    shape: BoxShape.circle,
+                  ),
+                  selectedTextStyle: TextStyle(color: Colors.white),
+                ),
+                headerStyle: HeaderStyle(
+                  formatButtonVisible: false,
+                  titleCentered: true,
+                  headerMargin: EdgeInsets.zero, // Remove margin above the header
+                  titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  headerPadding: EdgeInsets.symmetric(vertical: 4), // Reduce vertical padding
+                ),
+                // Set the start of the week to Monday
+                startingDayOfWeek: StartingDayOfWeek.monday, // Start from Monday
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -1,6 +1,7 @@
 
 import 'package:appointment_app/export.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:table_calendar/table_calendar.dart';
 class BookAppointmentScreen extends StatefulWidget {
   const BookAppointmentScreen({super.key});
   @override
@@ -8,55 +9,18 @@ class BookAppointmentScreen extends StatefulWidget {
 }
 
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
-  var containerColorProvider;
   final TextEditingController controller=TextEditingController();
-  List<DateTime?> _singleDatePickerValueWithDefaultValue=[
-    DateTime.now().add(const Duration(days: 1)),
-  ];
-  final config=CalendarDatePicker2Config(
-    calendarViewMode: CalendarDatePicker2Mode.scroll,
-    selectedDayHighlightColor: AppColors.blue,
-    weekdayLabels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
-    weekdayLabelTextStyle: TextStyle(
-      color: AppColors.blue.withOpacity(0.2),
-      fontWeight: FontWeight.w300,
-      fontSize: 12,
-    ),
-    firstDayOfWeek: 1,
-    controlsHeight: 50,
-    dayMaxWidth: 25,
-    controlsTextStyle: TextStyle(
-      color: AppColors.black,
-      fontSize: 15,
-      fontWeight: FontWeight.bold,
-    ),
-    dayTextStyle: const TextStyle(
-      color: Colors.amber,
-      fontWeight: FontWeight.bold,
-    ),
-    disabledDayTextStyle: const TextStyle(
-      color: Colors.grey,
-    ),
-    modePickersGap: 0,
-    modePickerTextHandler: ({required monthDate, isMonthPicker}) {
-      if (isMonthPicker ?? false) {
-        // Custom month picker text
-        return '${getLocaleShortMonthFormat(const Locale('en')).format(monthDate)} C';
-      }
+  var containerColorProvider;
+  late DateTime _selectedDay;
+  late DateTime _focusedDay;
 
-      return null;
-    },
-    firstDate: DateTime(DateTime.now().year - 2, DateTime.now().month - 1,
-        DateTime.now().day - 5),
-    lastDate: DateTime(DateTime.now().year + 3, DateTime.now().month + 2,
-        DateTime.now().day + 10),
-    selectableDayPredicate: (day) =>
-    !day
-        .difference(DateTime.now().add(const Duration(days: 3)))
-        .isNegative &&
-        day.isBefore(DateTime.now().add(const Duration(days: 30))),
+  @override
+  void initState() {
+    super.initState();
+    _selectedDay = DateTime.now();
+    _focusedDay = DateTime.now();
+  }
 
-  );
   @override
   Widget build(BuildContext context) {
     void iniState() {
@@ -356,20 +320,39 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontSize: 16,
                     color: AppColors.blue),
                 verticalSpacer(10),
-                Container(
-                  width: 407.w,
-                  height: 260.h,
-                  color: AppColors.lavender,
-                  child:CalendarDatePicker2(
-                    displayedMonthDate: _singleDatePickerValueWithDefaultValue.first,
-                    config: config,
-                    value: _singleDatePickerValueWithDefaultValue,
-                    onValueChanged: (dates) => setState(
-                            () => _singleDatePickerValueWithDefaultValue = dates),
+                TableCalendar(
+                  firstDay: DateTime(2020),
+                  lastDay: DateTime(2025),
+                  focusedDay: _focusedDay,
+                  selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                  onDaySelected: (selectedDay, focusedDay) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      _focusedDay = focusedDay;
+                    });
+                  },
+                  calendarStyle: CalendarStyle(
+                    todayDecoration: BoxDecoration(
+                      color: Colors.blue,
+                      shape: BoxShape.circle,
+                    ),
+                    selectedDecoration: BoxDecoration(
+                      color: Colors.orange, // Default selected color
+                      shape: BoxShape.circle,
+                    ),
+                    selectedTextStyle: TextStyle(color: Colors.white),
                   ),
-
+                  headerStyle: HeaderStyle(
+                    formatButtonVisible: false,
+                    titleCentered: true,
+                    headerMargin: EdgeInsets.zero, // Remove margin above the header
+                    titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    headerPadding: EdgeInsets.symmetric(vertical: 4), // Reduce vertical padding
+                  ),
+                  // Set the start of the week to Monday
+                  startingDayOfWeek: StartingDayOfWeek.monday, // Start from Monday
                 ),
-                verticalSpacer(10),
+                verticalSpacer(40),
                 customText(
                     text: 'Available Time',
                     fontWeight: FontWeight.w500,
@@ -382,7 +365,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 customButton(
                     label: 'Make Appointment',
                     onPressed: () {
-                      Get.to(() => const AppointmentSuccessfulScreen());
+                      Get.to(() => const AppointmentDetailsScreen());
                     },
                     buttonColor: AppColors.blue,
                     textColor: AppColors.white),
