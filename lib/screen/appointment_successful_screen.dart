@@ -27,7 +27,7 @@ class _AppointmentSuccessfulScreenState
           Positioned(
               top: 0.h,
               left: 2.w,
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_back_ios,
                 color: AppColors.white,
               )),

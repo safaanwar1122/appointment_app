@@ -1,6 +1,5 @@
 
 import 'package:appointment_app/export.dart';
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:table_calendar/table_calendar.dart';
 class BookAppointmentScreen extends StatefulWidget {
   const BookAppointmentScreen({super.key});
@@ -20,7 +19,10 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
     _selectedDay = DateTime.now();
     _focusedDay = DateTime.now();
   }
-
+List<String> time=[
+ "9:00 AM","9:30 AM","10:00 AM","19:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM",
+  "1:00 PM","1:30 PM","2:00 PM","12:30 PM",
+];
   @override
   Widget build(BuildContext context) {
     void iniState() {
@@ -130,17 +132,17 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 RichReadMoreText.fromString(
                     text:
                         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    textStyle: TextStyle(color: AppColors.grey),
+                    textStyle: const TextStyle(color: AppColors.grey),
                     settings: LengthModeSettings(
                         trimLength: 90,
                         trimCollapsedText: 'Read More',
                         trimExpandedText: 'Read Less',
                         onPressReadMore: () {},
                         onPressReadLess: () {},
-                        lessStyle: TextStyle(
+                        lessStyle: const TextStyle(
                           color: Colors.red,
                         ),
-                        moreStyle: TextStyle(color: AppColors.blue),),),
+                        moreStyle: const TextStyle(color: AppColors.blue),),),
                 verticalSpacer(30),
                 customText(
                     text: 'Patient Details',
@@ -154,12 +156,11 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       containerColorState(
-                        containerId: "yourself", // Unique identifier
+                        containerId: "yourself",
                         text: "Yourself",
                       ),
-                      SizedBox(width: 10), // Spacing between containers
                       containerColorState(
-                        containerId: "anotherPerson", // Unique identifier
+                        containerId: "anotherPerson",
                         text: "Another Person",
                       ),
                     ],
@@ -231,17 +232,17 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       containerColorState(
-                        containerId: "male", // Unique identifier
+                        containerId: "male",
                         text: "Male",
                       ),
-                      horizontalSpacer(10), // Spacing between containers
+                      horizontalSpacer(10),
                       containerColorState(
-                        containerId: "female", // Unique identifier
+                        containerId: "female",
                         text: "Female",
                       ),
-                      horizontalSpacer(10), // Spacing between containers
+                      horizontalSpacer(10),
                       containerColorState(
-                        containerId: "other", // Unique identifier
+                        containerId: "other",
                         text: "Other",
                       ),
                     ],
@@ -331,26 +332,26 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                       _focusedDay = focusedDay;
                     });
                   },
-                  calendarStyle: CalendarStyle(
+                  calendarStyle: const CalendarStyle(
                     todayDecoration: BoxDecoration(
                       color: Colors.blue,
                       shape: BoxShape.circle,
                     ),
                     selectedDecoration: BoxDecoration(
-                      color: Colors.orange, // Default selected color
+                      color: Colors.orange,
                       shape: BoxShape.circle,
                     ),
                     selectedTextStyle: TextStyle(color: Colors.white),
                   ),
-                  headerStyle: HeaderStyle(
+                  headerStyle: const HeaderStyle(
                     formatButtonVisible: false,
                     titleCentered: true,
-                    headerMargin: EdgeInsets.zero, // Remove margin above the header
+                    headerMargin: EdgeInsets.zero,
                     titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    headerPadding: EdgeInsets.symmetric(vertical: 4), // Reduce vertical padding
+                    headerPadding: EdgeInsets.symmetric(vertical: 4),
                   ),
-                  // Set the start of the week to Monday
-                  startingDayOfWeek: StartingDayOfWeek.monday, // Start from Monday
+
+                  startingDayOfWeek: StartingDayOfWeek.monday,
                 ),
                 verticalSpacer(40),
                 customText(
@@ -359,8 +360,14 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontSize: 16,
                     color: AppColors.blue),
                 verticalSpacer(10),
-              availableTime(time: '', ),
-
+              SizedBox(
+               // height: 40.h,
+                child: Wrap(
+                  spacing: 2.w,
+                 runSpacing: 2.h,
+                  children: time.map((t) => timeCard(time: t)).toList(),
+                ),
+              ),
                 verticalSpacer(80),
                 customButton(
                     label: 'Make Appointment',
@@ -489,264 +496,41 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
     );
   }
 
-  Widget availableTime({
+  Widget timeCard({
     required String time,
      Color? bg,
   }) {
-    return  Column(
-      children: [
-        Row(
-          children: [
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text: '9:00 AM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.blue),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '9:30 AM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.blue),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '10:00 AM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.white),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text: '19:30 AM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.blue),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '11:00 AM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.blue),
-              ),
-            ),
-          ],
+    return    Container(
+      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 5.h),
+
+      decoration: BoxDecoration(
+        color: AppColors.blue.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Center(
+        child: customText(
+          text: time,
+          fontWeight: FontWeight.w500,
+          fontSize: 12,
+          color: AppColors.blue,
         ),
-        verticalSpacer(6),
-        Row(
-          children: [
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '11:30 AM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.black),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '12:00 AM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.blue),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text: '12:30 AM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.blue),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '1:00 PM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.black),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '1:30 PM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.black),
-              ),
-            ),
-          ],
-        ),
-        verticalSpacer(6),
-        Row(
-          children: [
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '2:00 PM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.blue),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '2:30 PM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.black),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color:AppColors.blue.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '3:00 PM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.black),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text:  '3:30 PM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.blue),
-              ),
-            ),
-            horizontalSpacer(2),
-            Container(
-              width: 55.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: customText(
-                    text: '4:00 PM ',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    color: AppColors.blue),
-              ),
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 }
+
+
+
+
+
+
+/*
+
+ListView.builder(
+scrollDirection: Axis.horizontal,
+shrinkWrap: true,
+itemCount: time.length,
+itemBuilder: (context, index) {
+return  timeCard(time: time[index], );
+},),*/

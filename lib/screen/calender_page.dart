@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../utils/app_colors.dart';
-
 class CustomDatePicker extends StatefulWidget {
+  const CustomDatePicker({super.key});
+
   @override
   _CustomDatePickerState createState() => _CustomDatePickerState();
 }
@@ -29,7 +29,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white, // White color for the calendar
                 borderRadius: BorderRadius.all(Radius.circular(16)), // Rounded corners
               ),
@@ -44,7 +44,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                     _focusedDay = focusedDay;
                   });
                 },
-                calendarStyle: CalendarStyle(
+                calendarStyle: const CalendarStyle(
                   todayDecoration: BoxDecoration(
                     color: Colors.blue,
                     shape: BoxShape.circle,
@@ -55,7 +55,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                   ),
                   selectedTextStyle: TextStyle(color: Colors.white),
                 ),
-                headerStyle: HeaderStyle(
+                headerStyle: const HeaderStyle(
                   formatButtonVisible: false,
                   titleCentered: true,
                   headerMargin: EdgeInsets.zero, // Remove margin above the header
