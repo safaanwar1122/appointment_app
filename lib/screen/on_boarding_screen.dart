@@ -4,6 +4,14 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness:
+      Theme.of(context).scaffoldBackgroundColor == AppColors.white
+          ? Brightness.dark
+          : Brightness.light,
+      statusBarColor: AppColors.blue,
+      systemNavigationBarColor: AppColors.blue,
+    ));
     return ScreenUtilInit( //
       designSize: const Size(393, 852),
       builder: (context, child) {

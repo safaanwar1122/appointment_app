@@ -12,7 +12,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
 
   Widget build(BuildContext context) {
-
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness:
+      Theme.of(context).scaffoldBackgroundColor == AppColors.white
+          ? Brightness.light
+          : Brightness.light,
+      statusBarColor: AppColors.white,
+      systemNavigationBarColor: AppColors.white,
+    ));
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: null,

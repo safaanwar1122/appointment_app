@@ -5,6 +5,8 @@ export 'notification_card_provider.dart';
 export 'text_field_provider.dart';
 
 
+export '../models/doctors_list_model.dart';
+export '../controllers/favorite_icon_provider.dart';
 
 export 'package:flutter/material.dart';
 export  'package:flutter_screenutil/flutter_screenutil.dart';

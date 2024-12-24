@@ -17,8 +17,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness:
+      Theme.of(context).scaffoldBackgroundColor == AppColors.white
+          ? Brightness.light
+          : Brightness.light,
+      statusBarColor: AppColors.white,
       systemNavigationBarColor: AppColors.white,
     ));
     return Scaffold(

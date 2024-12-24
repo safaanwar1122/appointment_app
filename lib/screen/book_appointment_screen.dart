@@ -16,19 +16,24 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   @override
   void initState() {
     super.initState();
+    containerColorProvider = Provider.of<ContainerStateProvider>(context);
     _selectedDay = DateTime.now();
     _focusedDay = DateTime.now();
   }
+
 List<String> time=[
- "9:00 AM","9:30 AM","10:00 AM","19:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM",
-  "1:00 PM","1:30 PM","2:00 PM","12:30 PM",
+ "9:00 AM","9:30 AM","10:00 AM","19:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM", "1:00 PM","1:30 PM","2:00 PM","12:30 PM",
 ];
   @override
   Widget build(BuildContext context) {
-    void iniState() {
-      containerColorProvider = Provider.of<ContainerStateProvider>(context);
-    }
-
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness:
+      Theme.of(context).scaffoldBackgroundColor == AppColors.white
+          ? Brightness.light
+          : Brightness.light,
+      statusBarColor: AppColors.white,
+      systemNavigationBarColor: AppColors.white,
+    ));
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: null,
@@ -58,7 +63,7 @@ List<String> time=[
                             child: CircleAvatar(
                               radius: 16,
                               backgroundColor: AppColors.blue.withOpacity(.1),
-                              child: Container(
+                              child: SizedBox(
                                 width: 40.w,
                                 height: 40.h,
                                 child:
@@ -361,12 +366,16 @@ List<String> time=[
                     color: AppColors.blue),
                 verticalSpacer(10),
               SizedBox(
-               // height: 40.h,
-                child: Wrap(
-                  spacing: 2.w,
-                 runSpacing: 2.h,
-                  children: time.map((t) => timeCard(time: t)).toList(),
+                child:Wrap(
+                  spacing: 8.w,
+                  runSpacing: 8.h,
+                  children: List.generate(
+                    time.length,
+                        (index) => timeCard(time: time[index]),
+                  ),
                 ),
+
+
               ),
                 verticalSpacer(80),
                 customButton(

@@ -1,4 +1,8 @@
 import 'package:appointment_app/export.dart';
+import 'package:appointment_app/screen/favorite_doctor_screen.dart';
+
+import '../widgets/doctor_card.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,6 +12,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late DoctorsProvider doctorsProvider;
+  void didChangeDependencies(){
+    super.didChangeDependencies();
+    doctorsProvider= doctorsProvider=Provider.of<DoctorsProvider>(context);
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,18 +78,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 222.h,
                   child: ListView.builder(
+                    itemCount: doctorsProvider.doctorList.length,
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
+                      final doctor=doctorsProvider.doctorList[index];
                     return    doctorCard(
+                      doctorId: doctor.name,
                       imagePath: AppImages.doctorRyan,
-                      doctorName: 'Dr. Ryan Joe',
-                      specialization: 'Neurologist',
+                      doctorName:  doctor.name,
+                      specialization:doctor.specialization,
                       favouriteIconPath: AppImages.redHeartIcon,
                       startIcon: AppImages.starIcon,
                       isFavorite: true,
                       onBookTap: () {},
-                      onFavoriteTap: () {},
+                      onFavoriteTap: () {
+                       doctorsProvider.toggleFavorite(doctor.name);
+                      } ,
                     );
                   },),
                 ),
@@ -322,129 +337,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget doctorCard({
-    required String imagePath,
-    required String doctorName,
-    required String specialization,
-    required VoidCallback onBookTap,
-    required VoidCallback onFavoriteTap,
-    bool isFavorite = false,
-    required String favouriteIconPath,
-    required String startIcon,
-  }) {
-    return Container(
-    width: 169.w,
-      height: 222.h,
-      margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.grey.withOpacity(0.2),
-            spreadRadius: 1.r,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          )
-        ],
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: 8.h,
-            right: 2.w,
-            child: SvgPicture.asset(
-              favouriteIconPath,
-              color: isFavorite ? Colors.red : AppColors.grey,
-              width: 24.w,
-              height: 24.h,
-            ),
-          ),
-
-          Positioned.fill(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 100.h,
-                  child: Stack(
-                    alignment: Alignment.topCenter,
-                    children: [
-                      CircleAvatar(
-                        radius: 40.r,
-                        backgroundImage: AssetImage(imagePath),
-                      ),
-                      Positioned(
-                        top: 66.h,
-                        child: Center(
-                          child: Container(
-                            width: 70.w,
-                            height: 30.h,
-                            decoration: BoxDecoration(
-                              color: AppColors.ashBlue,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppImages.starIcon),
-                                horizontalSpacer(4),
-                                customText(
-                                    text: '4.9',
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16,
-                                    color: AppColors.black)
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                verticalSpacer(8),
-                customText(
-                  text: doctorName,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                  color: AppColors.black,
-                ),
-                verticalSpacer(4),
-                customText(
-                    text: specialization,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    color: AppColors.black),
-                // verticalSpacer(2),
-                SizedBox(
-                  width: 82.w,
-                  height: 36.h,
-                  child: ElevatedButton(
-                      onPressed: onBookTap,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.r),
-                        ),
-                      ),
-                      child: customText(
-                          text: "Book",
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          color: AppColors.white)),
-                ),
-              ],
-            ),
-          ),
 
 
-        ],
-      ),
-    );
-  }
 
-  }
+
+}
 
 

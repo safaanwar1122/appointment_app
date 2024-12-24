@@ -5,6 +5,14 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness:
+      Theme.of(context).scaffoldBackgroundColor == AppColors.blue
+          ? Brightness.dark
+          : Brightness.light,
+      statusBarColor: AppColors.blue,
+      systemNavigationBarColor: AppColors.blue,
+    ));
       WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 5), () {
         Get.offAll(() => const OnBoardingScreen());

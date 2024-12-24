@@ -9,6 +9,7 @@ Widget customText({
   TextDecoration? decoration,
   Color? decorationColor,
 TextAlign? textAlign,
+
 }) {
   return Text(
     text,

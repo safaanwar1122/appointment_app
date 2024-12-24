@@ -1,5 +1,6 @@
 import 'package:appointment_app/export.dart';
 
+
 class RegisterAllProviders {
   static get allProvidersList => [
     ChangeNotifierProvider(create: (_) => AuthProvider()),
@@ -7,5 +8,7 @@ class RegisterAllProviders {
     ChangeNotifierProvider(create: (_)=>NotificationCardProviderColor()),
     ChangeNotifierProvider(create: (_)=>ContainerStateProvider(),),
     ChangeNotifierProvider(create: (_)=>TextFieldProvider()),
+    ChangeNotifierProvider(create: (_)=>FavoriteProvider()),
+    ChangeNotifierProvider(create: (_)=>DoctorsProvider()),
   ];
 }

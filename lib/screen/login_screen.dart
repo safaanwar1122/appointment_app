@@ -16,13 +16,18 @@ class _LoginScreenState extends State<LoginScreen> {
   String? _emailError;
   String? _passwordError;
   var authProvider;
+  void iniState(){
+    authProvider=Provider.of<AuthProvider>(context);
+  }
   @override
   Widget build(BuildContext context) {
-    void iniState(){
-         authProvider=Provider.of<AuthProvider>(context);
-    }
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness:
+      Theme.of(context).scaffoldBackgroundColor == AppColors.white
+          ? Brightness.light
+          : Brightness.light,
+      statusBarColor: AppColors.white,
       systemNavigationBarColor: AppColors.white,
     ));
 

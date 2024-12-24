@@ -44,6 +44,10 @@ dependencies:
   rich_readmore: ^1.1.1
   calendar_date_picker2: ^1.1.8
   table_calendar: ^3.0.0
+  date_time_picker: ^2.1.0
+  geolocator: ^13.0.2
+  geocoding:
+  intl: ^0.17.0
   #dotted_line_flutter: ^0.1.6
 
 dev_dependencies:

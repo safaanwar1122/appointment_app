@@ -250,7 +250,6 @@ class _StaticChatInboxScreenState extends State<StaticChatInboxScreen> {
     required Color bg,
   }) {
     bool isSender = messageType == 'sender';
-
     return Padding(
 
       padding: EdgeInsets.symmetric(vertical: messageType == 'sender' ? 2.h : 8.h, horizontal: 16.w),

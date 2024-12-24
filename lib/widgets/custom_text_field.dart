@@ -4,6 +4,8 @@ Widget customTextField( {
   required TextEditingController controller,
   //required String labelText,
   // required bool obscureText,
+ // required String fieldKey,
+  //required Map<String, dynamic> profile,
   EdgeInsetsGeometry? padding,
   TextStyle? textStyle,
   TextStyle? hintStyle,
@@ -13,8 +15,13 @@ Widget customTextField( {
   String? errorText,
   String ? label,
   String? labelText,
-  required EdgeInsets contentPadding,
+   EdgeInsets? contentPadding,
   bool isPasswordField=false,
+   Function(dynamic value) ?onChanged,
+   Future<Null> Function()? onTap,
+ bool ?  readOnly,
+   //required Function(dynamic value) onChange,
+//required Future<Null> Function() onTap,
 }) {
   return Consumer<AuthProvider>(builder: (context, provider, child ){
     return  Padding(
@@ -23,6 +30,7 @@ Widget customTextField( {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
+           //// initialValue: profile[fieldKey],
             controller: controller,
             obscureText:isPasswordField&&  !provider.isPasswordVisible,
             style: textStyle ?? TextStyle(fontSize: 16.sp),
