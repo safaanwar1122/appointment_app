@@ -15,6 +15,7 @@ Widget customTextField( {
   String? errorText,
   String ? label,
   String? labelText,
+  TextInputType? keyboardType,
    EdgeInsets? contentPadding,
   bool isPasswordField=false,
    Function(dynamic value) ?onChanged,
@@ -40,6 +41,7 @@ Widget customTextField( {
               prefixIcon: prefixIcon,
               labelText: labelText,
               labelStyle: TextStyle(fontSize: 16.sp),
+
               suffixIcon:isPasswordField?  GestureDetector(
                 onTap: (){
                   provider.togglePasswordVisibility();

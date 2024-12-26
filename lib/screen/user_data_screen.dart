@@ -1,4 +1,5 @@
 import 'package:appointment_app/export.dart';
+
 class UserDataScreen extends StatefulWidget {
   const UserDataScreen({super.key});
 
@@ -21,9 +22,9 @@ class _UserDataScreenState extends State<UserDataScreen> {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarIconBrightness:
-      Theme.of(context).scaffoldBackgroundColor == AppColors.white
-          ? Brightness.light
-          : Brightness.light,
+          Theme.of(context).scaffoldBackgroundColor == AppColors.white
+              ? Brightness.light
+              : Brightness.light,
       statusBarColor: AppColors.white,
       systemNavigationBarColor: AppColors.white,
     ));
@@ -129,26 +130,45 @@ class _UserDataScreenState extends State<UserDataScreen> {
                   color: AppColors.iconColor,
                 ),
               ),
-              customTextField(
+              TextField(
                 controller: contactController,
-                //obscureText: false,
-                hintText: "Enter contact no..",
-                hintStyle: TextStyle(
-                  color: AppColors.grey,
-                  fontWeight: FontWeight.w300,
-                  fontSize: 16.sp,
-                  height: 2.h,
-                ),
-                contentPadding: const EdgeInsets.only(left: -1.0),
-                prefixIcon: SvgPicture.asset(
-                  AppImages.call,
-                  width: 16.w,
-                  height: 19.h,
-                  fit: BoxFit.scaleDown,
-                ),
-                padding: EdgeInsets.symmetric(vertical: 0.h),
-                textStyle: const TextStyle(
+                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                style: const TextStyle(
                   color: AppColors.iconColor,
+                ),
+                decoration: InputDecoration(
+                  hintText: 'Enter contact no..',
+                  hintStyle: TextStyle(
+                    color: AppColors.grey,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16.sp,
+                    height: 2.h,
+                  ),
+                  contentPadding: const EdgeInsets.only(left: -1),
+                  prefix: Padding(padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 13.w),
+                  child: SvgPicture.asset(
+                    AppImages.call,
+                    width: 16.w,
+                    height: 19.h,
+                    fit: BoxFit.scaleDown,
+                  ),),
+
+                  enabledBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.lightGrey,
+                    ),
+                  ),
+                  focusedBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.lightGrey,
+                    ),
+                  ),
+                  border:  const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.lightGrey,
+                    ),
+                  ),
+
                 ),
               ),
               Row(
@@ -191,7 +211,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.only(left: 5.w),
                               isDense: true,
-                             // hintText: selectedGender ?? 'Gender',
+                              // hintText: selectedGender ?? 'Gender',
                               hintStyle: TextStyle(
                                 color: AppColors.grey,
                                 fontWeight: FontWeight.w300,
@@ -208,7 +228,8 @@ class _UserDataScreenState extends State<UserDataScreen> {
                                 ),
                               ),
                               enabledBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(color: AppColors.lightGrey),
+                                borderSide:
+                                    BorderSide(color: AppColors.lightGrey),
                               ),
                             ),
                             child: DropdownButtonHideUnderline(
@@ -247,12 +268,11 @@ class _UserDataScreenState extends State<UserDataScreen> {
                       ),
                     ),
                   ),
-
                 ],
               ),
               customTextField(
                 controller: locationController,
-              //  obscureText: false,
+                //  obscureText: false,
                 hintText: "Add Location",
                 hintStyle: TextStyle(
                   color: AppColors.grey,
@@ -282,9 +302,11 @@ class _UserDataScreenState extends State<UserDataScreen> {
               verticalSpacer(60),
               customButton(
                 label: 'COMPLETE PROFILE',
-                onPressed: _isLoading ? () {} : () {
-                  Get.to(()=>const HostScreen());
-                },
+                onPressed: _isLoading
+                    ? () {}
+                    : () {
+                        Get.to(() => const HostScreen());
+                      },
                 buttonColor: AppColors.blue,
                 textColor: AppColors.white,
                 width: 300.w,

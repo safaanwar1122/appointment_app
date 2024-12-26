@@ -1,5 +1,7 @@
 import 'package:appointment_app/export.dart';
-
+//https://blog.logrocket.com/flutter-form-validation-complete-guide/
+// https://programmerspouch.medium.com/email-validation-using-email-validator-package-in-flutter-95e84dfced10
+// https://flutteradda.com/flutter/email-validation-in-flutter.html
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 

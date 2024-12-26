@@ -1,19 +1,24 @@
 import 'package:appointment_app/export.dart';
 
-class AppointmentScreen extends StatefulWidget {
-  const AppointmentScreen({super.key});
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../controllers/appointment_doctor_provider.dart';
+import '../models/appointment_doctor_details_model.dart';
+
+class AppointmentScreenUsingProvider extends StatefulWidget {
+  const AppointmentScreenUsingProvider({super.key});
 
   @override
-  State<AppointmentScreen> createState() => _AppointmentScreenState();
+  State<AppointmentScreenUsingProvider> createState() => _AppointmentScreenUsingProviderState();
 }
 
-class _AppointmentScreenState extends State<AppointmentScreen> {
+class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingProvider> {
   String selectedScreen = 'Upcoming';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightGrey.withOpacity(0.2),
+      backgroundColor: AppColors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(150.h),
         child: ClipRRect(
@@ -103,12 +108,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                       color: selectedScreen == 'Upcoming'
                                           ? AppColors.white
                                           : Colors.transparent,
-                                    borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(2.r),
-                                      topLeft: Radius.circular(2.r),
-                                      bottomRight: Radius.circular(2.r),
-                                      bottomLeft: Radius.circular(2.r),
-                                    )
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(2.r),
+                                        topLeft: Radius.circular(2.r),
+                                        bottomRight: Radius.circular(2.r),
+                                        bottomLeft: Radius.circular(2.r),
+                                      )
                                   ),
                                 ),
                               ],
@@ -135,17 +140,17 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                   margin: EdgeInsets.only(top: 2.h),
                                   height: 4.h,
                                   width: 81.w,
-                                 decoration: BoxDecoration(
-                                   borderRadius: BorderRadius.only(
-                                     topRight: Radius.circular(2.r),
-                                     topLeft: Radius.circular(2.r),
-                                     bottomRight: Radius.circular(2.r),
-                                     bottomLeft: Radius.circular(2.r),
-                                   ),
-                                   color: selectedScreen == 'Completed'
-                                       ? AppColors.white
-                                       : Colors.transparent,
-                                 ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(2.r),
+                                      topLeft: Radius.circular(2.r),
+                                      bottomRight: Radius.circular(2.r),
+                                      bottomLeft: Radius.circular(2.r),
+                                    ),
+                                    color: selectedScreen == 'Completed'
+                                        ? AppColors.white
+                                        : Colors.transparent,
+                                  ),
                                 ),
                               ],
                             ),
@@ -197,24 +202,30 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
           ),
         ),
       ),
-      body: ListView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            itemCount: 20,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              return  Padding(padding: EdgeInsets.symmetric(horizontal:16.w ,vertical: 4.h,
-              ),
-                child: appointmentCard(
-                  bg: AppColors.white,
-                  title: '',
-                  subTitle: '',
-                  imagePath: AppImages.doctorJohn,
-                  date: 'Today:03:00 PM',
-                ),
+      body: Consumer<AppointmentProvider>(
 
-              );
-            }),
+          builder: (context, appointmentProvider, child){
+            final appointments=appointmentProvider.appointments;
+            return ListView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                itemCount: appointments.length,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
+                  final appointment=appointments[index];
+                  return  Padding(padding: EdgeInsets.symmetric(horizontal:16.w ,vertical: 4.h,
+                  ),
+                    child: appointmentCard(
+                      bg: AppColors.white,
+                      title: appointment.name,
+                      subTitle: appointment.specialization,
+                      imagePath: appointment.imagePath,
+                      date: appointment.time,
+                    ),
+
+                  );
+                });
+          }),
     );
   }
 
@@ -257,13 +268,13 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       customText(
-                        text: 'Dr. John Doe',
+                        text: title,
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                         color: AppColors.black,
                       ),
                       customText(
-                        text: 'Cardiologist',
+                        text: subTitle,
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
                         color: AppColors.grey,
@@ -323,7 +334,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   height: 36.h,
                   child: ElevatedButton(
                     onPressed: () {
-                    //  Get.to(() =>const BookAppointmentScreen());
+                      //  Get.to(() =>const BookAppointmentScreen());
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blue,
@@ -348,6 +359,4 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   }
 
 }
-
-
 

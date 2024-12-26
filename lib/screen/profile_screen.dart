@@ -1,5 +1,6 @@
 
 import 'package:appointment_app/export.dart';
+import 'package:appointment_app/screen/favorite_doctor_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -127,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         verticalSpacer(30),
                         customRowContainer(
                           assetImagePath: AppImages.blueUser,
-                          text: "Profile",
+                          text: "Update Profile",
                           textStyle: const TextStyle(
                             fontSize: 16,
                             color: AppColors.white,
@@ -139,18 +140,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           avatarRadius: 20.r,
                         ),
                         verticalSpacer(20),
-                        customRowContainer(
-                          assetImagePath: AppImages.heart,
-                          text: "Favourite",
-                          textStyle: const TextStyle(
+                        GestureDetector(
+                          onTap: (){
+                            Get.to(()=>const FavoriteDoctorScreen());
+                          },
+                          child: customRowContainer(
+                            assetImagePath: AppImages.heart,
+                            text: "Favourite",
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              color: AppColors.white,
+                            ),
+                            textColor: AppColors.white,
+                            iconColor: AppColors.white,
+                            fontWeight: FontWeight.w400,
                             fontSize: 16,
-                            color: AppColors.white,
+                            avatarRadius: 20.r,
                           ),
-                          textColor: AppColors.white,
-                          iconColor: AppColors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          avatarRadius: 20.r,
                         ),
                         verticalSpacer(20),
                         customRowContainer(

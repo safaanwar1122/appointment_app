@@ -12,10 +12,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late DoctorsProvider doctorsProvider;
+  late HomeDoctorsProvider doctorsProvider;
   void didChangeDependencies(){
     super.didChangeDependencies();
-    doctorsProvider= doctorsProvider=Provider.of<DoctorsProvider>(context);
+    doctorsProvider= doctorsProvider=Provider.of<HomeDoctorsProvider>(context);
 
   }
   @override
@@ -82,21 +82,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      final doctor=doctorsProvider.doctorList[index];
-                    return    doctorCard(
-                      doctorId: doctor.name,
-                      imagePath: AppImages.doctorRyan,
-                      doctorName:  doctor.name,
-                      specialization:doctor.specialization,
-                      favouriteIconPath: AppImages.redHeartIcon,
-                      startIcon: AppImages.starIcon,
-                      isFavorite: true,
-                      onBookTap: () {},
-                      onFavoriteTap: () {
-                       doctorsProvider.toggleFavorite(doctor.name);
-                      } ,
-                    );
-                  },),
+                      final doctor = doctorsProvider.doctorList[index];
+                      return Consumer<HomeDoctorsProvider>(
+                        builder: (context, doctorsProvider, child) {
+                          return doctorCard(
+                            doctorId: doctor.name,
+                            imagePath: AppImages.doctorRyan,
+                            doctorName: doctor.name,
+                            specialization: doctor.specialization,
+                            favouriteIconPath: AppImages.redHeartIcon,
+                            startIcon: AppImages.starIcon,
+                            isFavorite: doctor.isFavorite, // Dynamically track favorite status
+                            onBookTap: () {
+                              // Add booking functionality here
+                            },
+                            onFavoriteTap: () {
+                              doctorsProvider.toggleFavorite(doctor.name);
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+
                 ),
 
                /* Row(

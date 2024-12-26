@@ -1,5 +1,8 @@
 import 'package:appointment_app/export.dart';
 
+import 'appointment_screen_using_provider.dart';
+import 'chat_screen_using_provider.dart';
+
 class HostScreen extends StatefulWidget {
   const HostScreen({super.key});
 
@@ -12,8 +15,10 @@ class _HostScreenState extends State<HostScreen> {
   int pageIndex = 0;
   final List<Widget> pages = [
     const HomeScreen(),
-    const AppointmentScreen(),
-    const ChatScreen(),
+    const AppointmentScreenUsingProvider(),
+    //const AppointmentScreen(),
+   // const ChatScreen(),
+    const ChatScreenUsingProvider(),
     const ProfileScreen(),
   ];
   void onTapHandler(int index) {

@@ -1,17 +1,15 @@
 import 'package:appointment_app/export.dart';
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+import 'package:provider/provider.dart';
 
-  @override
-  State<ChatScreen> createState() => _ChatScreenState();
-}
+import '../controllers/message_call_provider.dart'; // Import provider package
 
-class _ChatScreenState extends State<ChatScreen> {
-  String selectedScreen = 'Messages';
+class ChatScreenUsingProvider extends StatelessWidget {
+  const ChatScreenUsingProvider({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightGrey.withOpacity(0.2),
+      backgroundColor: AppColors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(150.h),
         child: ClipRRect(
@@ -79,9 +77,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              setState(() {
-                                selectedScreen = 'Messages';
-                              });
+                              context.read<MessageCallProvider>().setSelectedScreen('Messages');
                             },
                             child: Column(
                               children: [
@@ -89,7 +85,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   text: 'Messages',
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
-                                  color: selectedScreen == 'Messages'
+                                  color: context.watch<MessageCallProvider>().selectedScreen == 'Messages'
                                       ? AppColors.white
                                       : AppColors.white.withOpacity(0.5),
                                 ),
@@ -99,24 +95,23 @@ class _ChatScreenState extends State<ChatScreen> {
                                   height: 4.h,
                                   width: 70.w,
                                   decoration: BoxDecoration(
-                                      color: selectedScreen == 'Messages'
-                                          ? AppColors.white
-                                          : Colors.transparent,
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(2.r),
-                                        topLeft: Radius.circular(2.r),
-                                        bottomRight: Radius.circular(2.r),
-                                        bottomLeft: Radius.circular(2.r),
-                                      )),
+                                    color: context.watch<MessageCallProvider>().selectedScreen == 'Messages'
+                                        ? AppColors.white
+                                        : Colors.transparent,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(2.r),
+                                      topLeft: Radius.circular(2.r),
+                                      bottomRight: Radius.circular(2.r),
+                                      bottomLeft: Radius.circular(2.r),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                           GestureDetector(
                             onTap: () {
-                              setState(() {
-                                selectedScreen = 'Calls';
-                              });
+                              context.read<MessageCallProvider>().setSelectedScreen('Calls');
                             },
                             child: Column(
                               children: [
@@ -124,7 +119,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   text: 'Calls',
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
-                                  color: selectedScreen == 'Calls'
+                                  color: context.watch<MessageCallProvider>().selectedScreen == 'Calls'
                                       ? AppColors.white
                                       : AppColors.white.withOpacity(0.5),
                                 ),
@@ -134,15 +129,15 @@ class _ChatScreenState extends State<ChatScreen> {
                                   height: 4.h,
                                   width: 70.w,
                                   decoration: BoxDecoration(
+                                    color: context.watch<MessageCallProvider>().selectedScreen == 'Calls'
+                                        ? AppColors.white
+                                        : Colors.transparent,
                                     borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(2.r),
                                       topLeft: Radius.circular(2.r),
                                       bottomRight: Radius.circular(2.r),
                                       bottomLeft: Radius.circular(2.r),
                                     ),
-                                    color: selectedScreen == 'Calls'
-                                        ? AppColors.white
-                                        : Colors.transparent,
                                   ),
                                 ),
                               ],
@@ -158,27 +153,31 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ),
       ),
-      body: ListView.builder(
+      body: Consumer<MessageCallProvider>(builder: (context, messageCallProvider, child){
+        return ListView.builder(
           padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          itemCount: 20,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.w,
-                vertical: 4.h,
-              ),
-              child: chatCard(
-                  title: 'Dr. John Doe',
-                  chat: 'Lorem ipsum dolor sit amet',
-                  date: '03:00 PM',
-                  imagePath: AppImages.doctorJohn),
-            );
-          }),
+            shrinkWrap: true,
+            itemCount: messageCallProvider.selectedScreen=='Messages'
+                ?messageCallProvider.messages.length:messageCallProvider.call.length,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index){
+            return messageCallProvider.selectedScreen=='Messages'?messageCard(
+                title:messageCallProvider.messages[index].title,
+                chat:messageCallProvider.messages[index].chat,
+                date: messageCallProvider.messages[index].date,
+                imagePath: messageCallProvider.messages[index].image):
+            callCard(
+                title: messageCallProvider.call[index].title,
+                doctorImagePath:messageCallProvider.call[index].doctorImagePath,
+                audioCallPath:messageCallProvider.call[index].audioCallPath,
+                videoCallPath: messageCallProvider.call[index].videoCallPath);
+            });
+      }),
     );
+
   }
-  Widget chatCard({
+
+  Widget messageCard({
     required String title,
     required String chat,
     required String date,
@@ -188,9 +187,83 @@ class _ChatScreenState extends State<ChatScreen> {
       onTap: (){
         Get.to(() => const DynamicChatScreen());
       },
+      child: Padding(
+
+        padding: const EdgeInsets.all(6.0),
+        child: Container(
+         /* width: 344.w,
+          height: 80.h,*/
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(6.r),
+            boxShadow: [
+              BoxShadow(
+                spreadRadius: 1.r,
+                blurRadius: 5,
+                color: AppColors.grey.withOpacity(0.2),
+                offset: const Offset(0, 3),
+              )
+            ],
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+            child: Row(
+              children: [
+                Image.asset(
+                  imagePath,
+                  fit: BoxFit.cover,
+                ),
+                SizedBox(width: 10.w), // Spacing between the image and text
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          customText(
+                            text: title,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            color: AppColors.black,
+                          ),
+                          customText(
+                            text: date,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: AppColors.grey,
+                          ),
+                        ],
+                      ),
+
+                      customText(
+                        text: chat,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        color: AppColors.grey,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  Widget callCard({
+    required String title,
+    required String doctorImagePath,
+    required String audioCallPath,
+    required String videoCallPath,
+  }){
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: 344.w,
-        height: 80.h,
+       /* width: 344.w,
+        height: 80.h,*/
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(6.r),
@@ -207,48 +280,68 @@ class _ChatScreenState extends State<ChatScreen> {
           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
           child: Row(
             children: [
-              Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
+              // Doctor's Image
+              ClipOval(
+                child: Image.asset(
+                  doctorImagePath,
+                  width: 50.w,
+                  height: 50.h,
+                  fit: BoxFit.cover,
+                ),
               ),
-              SizedBox(width: 10.w), // Spacing between the image and text
+              horizontalSpacer(10), // Spacing between image and title
+
+              // Title
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        customText(
-                          text: title,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          color: AppColors.black,
-                        ),
-                        customText(
-                          text: date,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: AppColors.grey,
-                        ),
-                      ],
-                    ),
 
                     customText(
-                      text: chat,
-                      fontWeight: FontWeight.w400,
+                      text: title,
+                      fontWeight: FontWeight.w600,
                       fontSize: 16,
-                      color: AppColors.grey,
+                      color: AppColors.black,
                     ),
                   ],
                 ),
+              ),
+
+              // Call icons (on the right)
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      // Your voice call logic
+                    },
+                    child: CircleAvatar(
+                      radius: 20.r,
+                      backgroundColor: AppColors.darkBlue,
+                      child: SvgPicture.asset(audioCallPath,
+                        fit: BoxFit.scaleDown,),
+                    ),
+                  ),
+                  horizontalSpacer(10), // Spacing between icons
+                  GestureDetector(
+                    onTap: () {
+                      // Your video call logic
+                    },
+                    child: CircleAvatar(
+                      radius: 20.r,
+                      backgroundColor: AppColors.darkBlue,
+                      child: SvgPicture.asset(videoCallPath,
+                        fit: BoxFit.scaleDown,),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
         ),
       ),
     );
+
   }
 
 }

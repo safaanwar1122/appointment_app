@@ -1,4 +1,3 @@
-
 import 'package:appointment_app/export.dart';
 
 import '../widgets/doctor_card.dart';
@@ -13,7 +12,7 @@ class FavoriteDoctorScreen extends StatefulWidget {
 class _FavoriteDoctorScreenState extends State<FavoriteDoctorScreen> {
   @override
   Widget build(BuildContext context) {
-    final favoriteDoctors=Provider.of<FavoriteProvider>(context).getFavoriteDoctors();
+    final doctorsProvider = Provider.of<HomeDoctorsProvider>(context);
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -22,7 +21,7 @@ class _FavoriteDoctorScreenState extends State<FavoriteDoctorScreen> {
         backgroundColor: Colors.transparent,
         title: Padding(
           padding:
-          EdgeInsets.only(left: 15.w, right: 65.w, top: 23.h, bottom: 10.h),
+              EdgeInsets.only(left: 15.w, right: 65.w, top: 23.h, bottom: 10.h),
           child: Column(
             children: [
               verticalSpacer(10),
@@ -37,7 +36,7 @@ class _FavoriteDoctorScreenState extends State<FavoriteDoctorScreen> {
                       radius: 15,
                       backgroundColor: AppColors.blue.withOpacity(0.2),
                       child:
-                      const Icon(Icons.arrow_back, color: AppColors.white),
+                          const Icon(Icons.arrow_back, color: AppColors.white),
                     ),
                   ),
                   //const Spacer(),
@@ -58,24 +57,48 @@ class _FavoriteDoctorScreenState extends State<FavoriteDoctorScreen> {
           ),
         ),
       ),
-      body: GridView.builder(
-        padding: EdgeInsets.all(16),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-          ),
-          itemCount: favoriteDoctors.length,
-          itemBuilder: (context, index){
-          final doctorId=favoriteDoctors[index];
-          return doctorCard(doctorId: doctorId,
-            imagePath:AppImages.doctorRyan,
-            doctorName: '',
-            specialization: '',
-            onBookTap: () {  },
-            onFavoriteTap: () {  },
-            favouriteIconPath: '', startIcon: '',);
-          }),
+      body: Consumer<HomeDoctorsProvider>(
+        builder: (context, doctorsProvider, child) {
+          final favoriteDoctors = doctorsProvider.favoriteDoctors;
+
+          return favoriteDoctors.isEmpty
+              ? Center(
+            child: customText(
+              text: 'Your Favorite folder is empty',
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              color: AppColors.black,
+            ),
+          )
+              : GridView.builder(
+            padding: const EdgeInsets.all(8.0),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Two cards per row
+              crossAxisSpacing: 10.0, // Spacing between columns
+              mainAxisSpacing: 10.0, // Spacing between rows
+              childAspectRatio: 0.8, // Adjust based on card height/width ratio
+            ),
+            itemCount: favoriteDoctors.length,
+            itemBuilder: (context, index) {
+              final doctor = favoriteDoctors[index];
+              return doctorCard(
+                imagePath: AppImages.doctorRyan, // Replace with actual image path
+                doctorId: doctor.name,
+                doctorName: doctor.name,
+                specialization: doctor.specialization,
+                isFavorite: doctor.isFavorite,
+                onBookTap: () {
+                  // Handle booking functionality here
+                },
+                onFavoriteTap: () {
+                  doctorsProvider.toggleFavorite(doctor.name);
+                },
+              );
+            },
+          );
+        },
+      ),
+
     );
   }
 }

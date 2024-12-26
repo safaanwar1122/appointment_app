@@ -15,5 +15,5 @@ export 'profile_screen.dart';
 export 'static_chat_inbox_screen.dart';
 export 'user_data_screen.dart';
 export 'video_call_screen.dart';
-export '../models/doctors_list_model.dart';
+export '../models/home_doctors_list_model.dart';
 export '../controllers/export_controller.dart';

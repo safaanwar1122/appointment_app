@@ -1,6 +1,9 @@
+import 'package:appointment_app/controllers/message_call_provider.dart';
 import 'package:appointment_app/export.dart';
 
-
+import '../controllers/appointment_doctor_provider.dart';
+import '../controllers/tabbar_provider.dart';
+import '../screen/appointment_screen_using_provider.dart';
 class RegisterAllProviders {
   static get allProvidersList => [
     ChangeNotifierProvider(create: (_) => AuthProvider()),
@@ -9,6 +12,9 @@ class RegisterAllProviders {
     ChangeNotifierProvider(create: (_)=>ContainerStateProvider(),),
     ChangeNotifierProvider(create: (_)=>TextFieldProvider()),
     ChangeNotifierProvider(create: (_)=>FavoriteProvider()),
-    ChangeNotifierProvider(create: (_)=>DoctorsProvider()),
-  ];
+    ChangeNotifierProvider(create: (_)=>HomeDoctorsProvider()),
+    ChangeNotifierProvider(create: (_)=>TabProvider()),
+    ChangeNotifierProvider(create: (_)=>AppointmentProvider()),
+    ChangeNotifierProvider(create: (_)=>MessageCallProvider()),
+    ];
 }

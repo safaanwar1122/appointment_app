@@ -1,13 +1,13 @@
-class DoctorsDetails{
+class HomeDoctorsDetails{
   late final String name;
   late final String specialization;
-  late final bool isFavorite;
+ bool  isFavorite;
  // final String imagePath;
-  DoctorsDetails(
+  HomeDoctorsDetails(
       //this.imagePath,
       {
    required this.name,
     required this.specialization,
-    required this.isFavorite
+     this.isFavorite=false,
 });
 }
