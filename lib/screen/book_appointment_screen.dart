@@ -12,11 +12,17 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   var containerColorProvider;
   late DateTime _selectedDay;
   late DateTime _focusedDay;
+  @override
+  void didChangeDependencies(){
+    super.didChangeDependencies();
+    containerColorProvider = Provider.of<ContainerStateProvider>(context);
+
+  }
+
 
   @override
   void initState() {
     super.initState();
-    containerColorProvider = Provider.of<ContainerStateProvider>(context);
     _selectedDay = DateTime.now();
     _focusedDay = DateTime.now();
   }
