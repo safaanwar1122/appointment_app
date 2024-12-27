@@ -170,6 +170,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                         containerId: "yourself",
                         text: "Yourself",
                       ),
+                      horizontalSpacer(8),
                       containerColorState(
                         containerId: "anotherPerson",
                         text: "Another Person",
@@ -371,49 +372,42 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontSize: 16,
                     color: AppColors.blue),
                 verticalSpacer(10),
-            Consumer<AvailableTimeProvider>(
-              builder: (context, availableTimeProvider, child) {
-                final availableTimes = availableTimeProvider.availableTimes;
-                return SizedBox(
-                  height: 70.h,
-                  child: GridView.builder(
-                    padding: const EdgeInsets.all(2),
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 70.w,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                      childAspectRatio: 55.w / 24.h,
-                    ),
-                    itemCount: availableTimes.length,
-                    itemBuilder: (context, index) {
-                      final time = availableTimes[index];
-                      Color bgColor;
-                      Color textColor;
-                      if (time.isSchedule) {
-                        bgColor = AppColors.blue;
-                        textColor = AppColors.white;
-                      } else if (time.isFutureSchedule) {
-                        bgColor = AppColors.blue.withOpacity(0.3);
-                        textColor = AppColors.black;
-                      } else if (time.isCancel) {
-                        bgColor = AppColors.ashBlue;
-                        textColor = AppColors.blue;
-                      } else {
-                        bgColor = AppColors.blue.withOpacity(0.1);
-                        textColor = AppColors.blue;
-                      }
-                      return timeCard(
-                        time: time.time,
-                        bg: bgColor,
-                        textColor: textColor,
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
+                Consumer<AvailableTimeProvider>(
+                  builder: (context, availableTimeProvider, child) {
+                    final availableTimes = availableTimeProvider.availableTimes;
+                    return Padding(
+                      padding: EdgeInsets.all(8.w),
+                      child: Wrap(
+                        spacing: 8.w,
+                        runSpacing: 8.h,
+                        children: availableTimes.map((time) {
+                          Color bgColor;
+                          Color textColor;
+                          if (time.isSchedule) {
+                            bgColor = AppColors.blue;
+                            textColor = AppColors.white;
+                          } else if (time.isFutureSchedule) {
+                            bgColor = AppColors.blue.withOpacity(0.3);
+                            textColor = AppColors.black;
+                          } else if (time.isCancel) {
+                            bgColor = AppColors.ashBlue;
+                            textColor = AppColors.blue;
+                          } else {
+                            bgColor = AppColors.blue.withOpacity(0.1);
+                            textColor = AppColors.blue;
+                          }
+                          return timeCard(
+                            time: time.time,
+                            bg: bgColor,
+                            textColor: textColor,
+                          );
+                        }).toList(),
+                      ),
+                    );
+                  },
+                ),
 
-            verticalSpacer(80),
+                verticalSpacer(80),
                 customButton(
                     label: 'Make Appointment',
                     onPressed: () {
@@ -547,7 +541,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   required Color textColor,
   }) {
     return    Container(
-      width: 55.w,
+      width: 60.w,
       height: 24.h,
       margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
       padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 5.h),
@@ -562,6 +556,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
           fontWeight: FontWeight.w500,
           fontSize: 12,
           color: textColor,
+
         ),
       ),
     );
