@@ -2,6 +2,7 @@ import 'package:appointment_app/export.dart';
 Widget customRowContainer({
   required String assetImagePath,
   required String text,
+IconData? icon,
   required TextStyle textStyle,
   required Color textColor,
   required FontWeight fontWeight,
@@ -20,6 +21,12 @@ Widget customRowContainer({
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
+
+        CircleAvatar(
+          radius: avatarRadius,
+          backgroundColor: Colors.transparent,
+          backgroundImage: AssetImage(assetImagePath),
+        ),
       CircleAvatar(
         backgroundColor: AppColors.white,
         // radius: containerHeight/2,

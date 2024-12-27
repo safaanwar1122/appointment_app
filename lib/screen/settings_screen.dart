@@ -1,23 +1,18 @@
 
 import 'package:appointment_app/export.dart';
+import 'package:appointment_app/screen/about_app_screen.dart';
 import 'package:appointment_app/screen/favorite_doctor_screen.dart';
 import 'package:appointment_app/screen/help_screen.dart';
 import 'package:appointment_app/screen/privacy_policy_screen.dart';
-import 'package:appointment_app/screen/settings_screen.dart';
 import 'package:appointment_app/screen/strip_payment_method_screen.dart';
-
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
-
+import 'package:appointment_app/screen/terms_conditions_screen.dart';
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
   @override
-  State<ProfileScreen> createState() =>
-      _ProfileScreenState();
+  State<SettingsScreen> createState() =>
+      _SettingsScreenState();
 }
-
-class _ProfileScreenState extends State<ProfileScreen> {
-
-
-
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: CircleAvatar(
                       radius: 15,
                       backgroundColor: Colors.transparent,
-                      child: Container(
+                      child: SizedBox(
                         width: 40.w,
                         height: 40.h,
                         child:
@@ -52,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Center(
                     child: customText(
-                      text: AppConstants.myProfile,
+                      text: AppConstants.settings,
                       fontWeight: FontWeight.w600,
                       fontSize: 24,
                       color: AppColors.blue,
@@ -130,9 +125,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: AppColors.white,
                         ),
                         verticalSpacer(30),
-                        customRowContainer(
-                          assetImagePath: AppImages.blueUser,
-                          text: "Update Profile",
+                        customRowSettingsContainer(
+                          text: "Language",
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            color: AppColors.white,
+                          ),
+                          textColor: AppColors.white,
+                          iconColor: AppColors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          avatarRadius: 20.r,  icon: const Icon(Icons.language, color: Colors.white, size: 24),
+                        ),
+                        verticalSpacer(20),
+                        customRowSettingsContainer(
+                          icon: const Icon(Icons.access_time, color: Colors.white, size: 24),
+                          text: "Time Format",
                           textStyle: const TextStyle(
                             fontSize: 16,
                             color: AppColors.white,
@@ -146,11 +154,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         verticalSpacer(20),
                         GestureDetector(
                           onTap: (){
-                            Get.to(()=>const FavoriteDoctorScreen());
+                            Get.to(()=>const StripPaymentMethodScreen());
                           },
-                          child: customRowContainer(
-                            assetImagePath: AppImages.heart,
-                            text: "Favourite",
+                          child:  customRowSettingsContainer(
+                            icon: const Icon(Icons.feedback, color: Colors.white, size: 24),
+                            text: "Feedback and Support",
                             textStyle: const TextStyle(
                               fontSize: 16,
                               color: AppColors.white,
@@ -163,70 +171,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         verticalSpacer(20),
-                      GestureDetector(
-                        onTap: (){
-                          Get.to(()=>const StripPaymentMethodScreen());
-                        },
-                        child:  customRowContainer(
-                          assetImagePath: AppImages.wallet,
-                          text: "Payment Method",
-                          textStyle: const TextStyle(
+                        GestureDetector(
+                          onTap: (){
+                            Get.to(()=> TermsAndConditions());
+                          },
+                          child:  customRowSettingsContainer( icon: const Icon(Icons.description, color: Colors.white, size: 24),
+                            text: "Terms & Conditions",
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              color: AppColors.white,
+                            ),
+                            textColor: AppColors.white,
+                            iconColor: AppColors.white,
+                            fontWeight: FontWeight.w400,
                             fontSize: 16,
-                            color: AppColors.white,
+                            avatarRadius: 20.r,
                           ),
-                          textColor: AppColors.white,
-                          iconColor: AppColors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          avatarRadius: 20.r,
                         ),
-                      ),
                         verticalSpacer(20),
-                       GestureDetector(
-                         onTap: (){
-                           Get.to(()=> PrivacyPolicyScreen());
-                         },
-                         child:  customRowContainer(
-                           assetImagePath: AppImages.blueLock,
-                           text: "Privacy Policy",
-                           textStyle: const TextStyle(
-                             fontSize: 16,
-                             color: AppColors.white,
-                           ),
-                           textColor: AppColors.white,
-                           iconColor: AppColors.white,
-                           fontWeight: FontWeight.w400,
-                           fontSize: 16,
-                           avatarRadius: 20.r,
-                         ),
-                       ),
-                        verticalSpacer(20),
-                       GestureDetector(
-                         onTap: (){
-                           Get.to(()=> SettingsScreen());
-                         },
-                         child:  customRowContainer(
-                           assetImagePath: AppImages.settings,
-                           text: "Settings",
-                           textStyle: const TextStyle(
-                             fontSize: 16,
-                             color: AppColors.white,
-                           ),
-                           textColor: AppColors.white,
-                           iconColor: AppColors.white,
-                           fontWeight: FontWeight.w400,
-                           fontSize: 16,
-                           avatarRadius: 20.r,
-                         ),
-                       ),
+                        GestureDetector(
+                          onTap: (){
+                            Get.to(()=> AboutAppScreen());
+                          },
+                          child:  customRowSettingsContainer(
+                            icon: const Icon(Icons.info_outline, color: Colors.white, size: 24),
+                            text: "About App",
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              color: AppColors.white,
+                            ),
+                            textColor: AppColors.white,
+                            iconColor: AppColors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            avatarRadius: 20.r,
+                          ),
+                        ),
                         verticalSpacer(20),
                         GestureDetector(
                           onTap: (){
                             Get.to(()=> const HelpScreen());
                           },
-                          child: customRowContainer(
-                            assetImagePath: AppImages.questionMark,
-                            text: "Help",
+                          child: customRowSettingsContainer(
+                            icon: const Icon(Icons.wb_sunny, color: Colors.white, size: 24),
+                            text: "Theme",
                             textStyle: const TextStyle(
                               fontSize: 16,
                               color: AppColors.white,
@@ -239,21 +227,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             showIcon: true,
                           ),
                         ),
-                        verticalSpacer(20),
-                        customRowContainer(
-                          assetImagePath: AppImages.logout,
-                          text: "Logout",
-                          textStyle: const TextStyle(
-                            fontSize: 16,
-                            color: AppColors.white,
-                          ),
-                          textColor: AppColors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          avatarRadius: 20.r,
-                          showIcon: false,
-                        ),
-                        verticalSpacer(20),
+
+
                       ],
                     ),
                   ),
@@ -267,4 +242,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     );
   }
+
+
+  Widget customRowSettingsContainer({
+    required String text,
+    required Widget icon,
+    required TextStyle textStyle,
+    required Color textColor,
+    required FontWeight fontWeight,
+    required double fontSize,
+    double avatarRadius = 10,
+    double containerWidth = double.infinity,
+    double containerHeight = 50.0,
+    Color containerColor = Colors.white,
+    double borderRadius = 10.0,
+    EdgeInsetsGeometry padding = const EdgeInsets.all(8.0),
+    double spacing = 8.0,
+    Color avatarColor = AppColors.blue,
+    Color iconColor = AppColors.white,
+    bool showIcon = true,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CircleAvatar(
+          radius: avatarRadius,
+          backgroundColor: avatarColor,
+          child: icon,
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(left: spacing),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  text,
+                  style: textStyle.copyWith(color: textColor),
+                ),
+                showIcon
+                    ? Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  color: iconColor,
+                  size: 18,
+                )
+                    : const SizedBox.shrink(),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+
 }

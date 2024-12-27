@@ -1,5 +1,6 @@
 import 'package:appointment_app/controllers/auth_provider.dart';
 import 'package:appointment_app/export.dart';
+import 'package:appointment_app/screen/about_app_screen.dart';
 import 'package:appointment_app/screen/appointment_screen.dart';
 import 'package:appointment_app/screen/appointment_screen_using_provider.dart';
 import 'package:appointment_app/screen/chat_screen_using_provider.dart';
@@ -7,8 +8,10 @@ import 'package:appointment_app/screen/favorite_doctor_screen.dart';
 import 'package:appointment_app/screen/home_screen.dart';
 import 'package:appointment_app/screen/login_screen_using_provider.dart';
 import 'package:appointment_app/screen/map_user_data_screen.dart';
+import 'package:appointment_app/screen/privacy_policy_screen.dart';
 import 'package:appointment_app/screen/sign_up_screen_using_provider.dart';
 import 'package:appointment_app/screen/splash_screen.dart';
+import 'package:appointment_app/screen/terms_conditions_screen.dart';
 import 'package:appointment_app/screen/user_data_screen.dart';
 import 'package:appointment_app/utils/providers_path.dart';
 import 'package:flutter/material.dart';
@@ -46,13 +49,17 @@ class MyApp extends StatelessWidget {
                //home:const UserDataScreen(),
                //home: const BookAppointmentScreen(),
              // home: ChatScreenUsingProvider(),
-             //home: const SplashScreen(),
+             home: const SplashScreen(),
              // home: const BookAppointmentScreen(),
              // home:const FavoriteDoctorScreen(),
               //home: const HomeScreen(),
              // home: const MapUserDataScreen(),
              // home:const  UserDataScreen(),
-              home:const AppointmentScreenUsingProvider(),
+             // home: const MapUserDataScreen(),
+            // home: PrivacyPolicyScreen(),
+            // home:   TermsAndConditions(),
+             //home:AboutAppScreen(),
+             // home:const AppointmentScreenUsingProvider(),
             //  home: const SignUpScreen(),
              // home:const AppointmentScreen(),
               //home: const LoginScreenUsingProvider(),

@@ -1,7 +1,6 @@
 import 'package:appointment_app/export.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:intl/intl.dart';
 
 
 class MapUserDataScreen extends StatefulWidget {
@@ -330,9 +329,4 @@ late Position currentPosition;
 
 
 
-
-
-
-//https://www.oreilly.com/library/view/flutter-and-dart/9781098119508/ch04.html
-//https://www.dbestech.com/tutorials/understanding-dart-map-and-list-for-flutter-development-explained-step-by-step-when-and-how-to-use
 

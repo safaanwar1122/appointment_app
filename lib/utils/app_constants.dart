@@ -11,10 +11,12 @@ class AppConstants{
   static String upComing="Upcoming";
   static String cancelled="Cancelled";
   static String home="Home";
+  static String settings="Settings";
   static String myProfile=" My Profile";
   static String favoriteDoctor="Favorite Doctor";
   static String notifications="Notifications";
   static String completeYourProfile="Complete your profile ";
-
-
+  static String privacyPolicy="Privacy Policy";
+  static String termsAndConditions="Terms & Conditions";
+  static String aboutApp="About App";
 }
