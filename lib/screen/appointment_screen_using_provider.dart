@@ -257,7 +257,7 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+        padding: EdgeInsets.only(left: 8.w, right: 8.w, top: 10.h, bottom: 6.h),
         child: Column(
           children: [
             Row(
@@ -301,13 +301,13 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
                 ),
               ],
             ),
-            verticalSpacer(8),
+            verticalSpacer(18),
             Container(
               width: double.infinity,
               height: 2.h,
               color: AppColors.lightGrey,
             ),
-            verticalSpacer(30),
+           // verticalSpacer(8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -363,7 +363,7 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
                            alignment: Alignment.center,
                            child: Container(
                              width: 2.w,
-                             height: 50.h,
+                             height: 70.h,
                              color: AppColors.lightGrey,
                            ),
                          ),
