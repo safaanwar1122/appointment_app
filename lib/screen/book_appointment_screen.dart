@@ -1,6 +1,8 @@
 
 import 'package:appointment_app/export.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../controllers/available_time_provider.dart';
 class BookAppointmentScreen extends StatefulWidget {
   const BookAppointmentScreen({super.key});
   @override
@@ -10,12 +12,14 @@ class BookAppointmentScreen extends StatefulWidget {
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   final TextEditingController controller=TextEditingController();
   var containerColorProvider;
+  var   availableTimes;
   late DateTime _selectedDay;
   late DateTime _focusedDay;
   @override
   void didChangeDependencies(){
     super.didChangeDependencies();
     containerColorProvider = Provider.of<ContainerStateProvider>(context);
+     availableTimes = Provider.of<AvailableTimeProvider>(context).availableTimes;
 
   }
 
@@ -26,11 +30,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
     _selectedDay = DateTime.now();
     _focusedDay = DateTime.now();
   }
-
-List<String> time=[
- "9:00 AM","9:30 AM","10:00 AM","19:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM", "1:00 PM","1:30 PM","2:00 PM","12:30 PM",
-];
-  @override
+ @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarIconBrightness:
@@ -371,19 +371,49 @@ List<String> time=[
                     fontSize: 16,
                     color: AppColors.blue),
                 verticalSpacer(10),
-              SizedBox(
-                child:Wrap(
-                  spacing: 8.w,
-                  runSpacing: 8.h,
-                  children: List.generate(
-                    time.length,
-                        (index) => timeCard(time: time[index]),
+            Consumer<AvailableTimeProvider>(
+              builder: (context, availableTimeProvider, child) {
+                final availableTimes = availableTimeProvider.availableTimes;
+                return SizedBox(
+                  height: 70.h,
+                  child: GridView.builder(
+                    padding: const EdgeInsets.all(2),
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 70.w,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      childAspectRatio: 55.w / 24.h,
+                    ),
+                    itemCount: availableTimes.length,
+                    itemBuilder: (context, index) {
+                      final time = availableTimes[index];
+                      Color bgColor;
+                      Color textColor;
+                      if (time.isSchedule) {
+                        bgColor = AppColors.blue;
+                        textColor = AppColors.white;
+                      } else if (time.isFutureSchedule) {
+                        bgColor = AppColors.blue.withOpacity(0.3);
+                        textColor = AppColors.black;
+                      } else if (time.isCancel) {
+                        bgColor = AppColors.ashBlue;
+                        textColor = AppColors.blue;
+                      } else {
+                        bgColor = AppColors.blue.withOpacity(0.1);
+                        textColor = AppColors.blue;
+                      }
+                      return timeCard(
+                        time: time.time,
+                        bg: bgColor,
+                        textColor: textColor,
+                      );
+                    },
                   ),
-                ),
+                );
+              },
+            ),
 
-
-              ),
-                verticalSpacer(80),
+            verticalSpacer(80),
                 customButton(
                     label: 'Make Appointment',
                     onPressed: () {
@@ -513,14 +543,17 @@ List<String> time=[
 
   Widget timeCard({
     required String time,
-     Color? bg,
+    required  Color bg,
+  required Color textColor,
   }) {
     return    Container(
+      width: 55.w,
+      height: 24.h,
       margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
       padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 5.h),
 
       decoration: BoxDecoration(
-        color: AppColors.blue.withOpacity(0.1),
+        color: bg,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Center(
@@ -528,7 +561,7 @@ List<String> time=[
           text: time,
           fontWeight: FontWeight.w500,
           fontSize: 12,
-          color: AppColors.blue,
+          color: textColor,
         ),
       ),
     );
