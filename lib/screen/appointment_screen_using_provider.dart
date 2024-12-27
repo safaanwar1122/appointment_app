@@ -241,162 +241,175 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
     required String date,
     required String status,
   }) {
-    return Container(
-      width: 344.w,
-      height: 172.h,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(6.r),
-        boxShadow: [
-          BoxShadow(
-            spreadRadius: 1.r,
-            blurRadius: 5,
-            color: AppColors.grey.withOpacity(0.2),
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(left: 8.w, right: 8.w, top: 10.h, bottom: 6.h),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Image.asset(
-                  imagePath,
-                  fit: BoxFit.cover,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      customText(
-                        text: title,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: AppColors.black,
-                      ),
-                      customText(
-                        text: subTitle,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: AppColors.grey,
-                      ),
-                      customText(
-                        text: date,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: AppColors.black,
-                      ),
-                    ],
+    return Padding(
+      padding:  EdgeInsets.symmetric(vertical: 8.h,horizontal: 8.w),
+      child: Container(
+        width: 344.w,
+        height: 172.h,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(6.r),
+          boxShadow: [
+            BoxShadow(
+              spreadRadius: 1.r,
+              blurRadius: 5,
+              color: AppColors.grey.withOpacity(0.2),
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(left: 8.w, right: 8.w, top: 10.h, bottom: 6.h),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Image.asset(
+                    imagePath,
+                    fit: BoxFit.cover,
                   ),
-                ),
-                const Spacer(),
-                CircleAvatar(
-                  radius: 20.r,
-                  backgroundColor: AppColors.blueLavender.withOpacity(0.3),
-                  child: SvgPicture.asset(AppImages.blueForwardArrow),
-                ),
-              ],
-            ),
-            verticalSpacer(18),
-            Container(
-              width: double.infinity,
-              height: 2.h,
-              color: AppColors.lightGrey,
-            ),
-           // verticalSpacer(8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (status == "Cancelled" || status == "Completed")
-                  Expanded(
-                    child: SizedBox(
-                      height: 36.h,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: status == "Cancelled" ? AppColors.ashBlue : AppColors.blue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40.r),
-                          ),
-                        ),
-                        child: customText(
-                          text: status == "Cancelled" ? 'Cancel' : 'Completed',
-                          fontWeight: FontWeight.w500,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        customText(
+                          text: title,
+                          fontWeight: FontWeight.w600,
                           fontSize: 16,
-                          color: AppColors.white,
+                          color: AppColors.black,
                         ),
-                      ),
+                        customText(
+                          text: subTitle,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: AppColors.grey,
+                        ),
+                        customText(
+                          text: date,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: AppColors.black,
+                        ),
+                      ],
                     ),
-                  )
-                else // For "Upcoming" status
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 121.w,
-                        height: 36.h,
+                  ),
+                  const Spacer(),
+                  CircleAvatar(
+                    radius: 20.r,
+                    backgroundColor: AppColors.blueLavender.withOpacity(0.3),
+                    child: SvgPicture.asset(AppImages.blueForwardArrow),
+                  ),
+                ],
+              ),
+              verticalSpacer(18),
+              // Conditionally show the red container only for "Upcoming" status
+              if (status == "Upcoming")
+                Container(
+                  width: double.infinity,
+                  height: 2.h,
+                  color: AppColors.lightGrey,
+                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (status == "Cancelled" || status == "Completed")
+                    Expanded(
+                      child: SizedBox(
+                       height: 40.h,
+
+
                         child: ElevatedButton(
+
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.ashBlue,
+                            backgroundColor: status == "Cancelled"
+                                ? AppColors.ashBlue
+                                : AppColors.blue,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.r),
+                              borderRadius: BorderRadius.circular(40.r),
                             ),
                           ),
                           child: customText(
-                            text: 'Cancel',
+                            text: status == "Cancelled" ? 'Cancel' : 'Completed',
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
                             color: AppColors.white,
                           ),
                         ),
                       ),
-                      horizontalSpacer(8),
-                      // Vertical container added conditionally
-                      if (status == "Upcoming")
-                       Padding(
-                         padding:  EdgeInsets.only(left: 30.w, right: 30.w, bottom:2.h, top: 0.h),
-                         child: Align(
-                           alignment: Alignment.center,
-                           child: Container(
-                             width: 2.w,
-                             height: 70.h,
-                             color: AppColors.lightGrey,
-                           ),
-                         ),
-                       ),
-                      horizontalSpacer(8),
-                      SizedBox(
-                        width: 121.w,
-                        height: 36.h,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.blue,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.r),
+                    )
+                  else // For "Upcoming" status
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 121.w,
+                          height: 36.h,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.ashBlue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.r),
+                              ),
+                            ),
+                            child: customText(
+                              text: 'Cancel',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: AppColors.white,
                             ),
                           ),
-                          child: customText(
-                            text: 'Completed',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: AppColors.white,
+                        ),
+                        horizontalSpacer(8),
+                        // Only show the light gray container for "Upcoming" status
+                        if (status == "Upcoming")
+                          Padding(
+                            padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 2.h, top: 0.h),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: 2.w,
+                                height: 70.h,
+                                color: AppColors.lightGrey,
+                              ),
+                            ),
+                          ),
+                        horizontalSpacer(8),
+                        SizedBox(
+                          width: 121.w,
+                          height: 36.h,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Get.to(() => const BookAppointmentScreen());
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.blue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.r),
+                              ),
+                            ),
+                            child: customText(
+                              text: 'Completed',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: AppColors.white,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-              ],
-            ),
-          ],
+                      ],
+                    ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
+
 
 
 }
