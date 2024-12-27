@@ -208,17 +208,14 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
         ),
       ),
       body: Consumer<AppointmentProvider>(
-
           builder: (context, appointmentProvider, child){
             final appointments=appointmentProvider.filterList;
-
             return ListView.builder(
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
                 itemCount: appointments.length,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-
                   final appointment=appointments[index];
                   return  Padding(padding: EdgeInsets.symmetric(horizontal:16.w ,vertical: 4.h,
                   ),
@@ -310,7 +307,7 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
               height: 2.h,
               color: AppColors.lightGrey,
             ),
-verticalSpacer(30),
+            verticalSpacer(30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -319,11 +316,8 @@ verticalSpacer(30),
                     child: SizedBox(
                       height: 36.h,
                       child: ElevatedButton(
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                         // maximumSize: Size(70.w, 36.h),
                           backgroundColor: status == "Cancelled" ? AppColors.ashBlue : AppColors.blue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40.r),
@@ -338,18 +332,15 @@ verticalSpacer(30),
                       ),
                     ),
                   )
-                else // For other statuses
+                else // For "Upcoming" status
                   Row(
                     children: [
                       SizedBox(
                         width: 121.w,
                         height: 36.h,
                         child: ElevatedButton(
-                          onPressed: () {
-
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                          //  maximumSize: Size(170.w, 36.h),
                             backgroundColor: AppColors.ashBlue,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.r),
@@ -363,16 +354,27 @@ verticalSpacer(30),
                           ),
                         ),
                       ),
-                     horizontalSpacer(8),
+                      horizontalSpacer(8),
+                      // Vertical container added conditionally
+                      if (status == "Upcoming")
+                       Padding(
+                         padding:  EdgeInsets.only(left: 30.w, right: 30.w, bottom:2.h, top: 0.h),
+                         child: Align(
+                           alignment: Alignment.center,
+                           child: Container(
+                             width: 2.w,
+                             height: 50.h,
+                             color: AppColors.lightGrey,
+                           ),
+                         ),
+                       ),
+                      horizontalSpacer(8),
                       SizedBox(
                         width: 121.w,
                         height: 36.h,
                         child: ElevatedButton(
-                          onPressed: () {
-                          
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                           // maximumSize: Size(170.w, 36.h),
                             backgroundColor: AppColors.blue,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.r),
@@ -390,13 +392,12 @@ verticalSpacer(30),
                   ),
               ],
             ),
-
-
           ],
         ),
       ),
     );
   }
+
 
 }
 
