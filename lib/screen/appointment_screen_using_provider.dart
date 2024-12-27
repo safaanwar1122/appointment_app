@@ -310,57 +310,88 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
               height: 2.h,
               color: AppColors.lightGrey,
             ),
+verticalSpacer(30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if(status!="Completed")
-                SizedBox(
-                  width: 121.w,
-                  height: 36.h,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.ashBlue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.r),
+                if (status == "Cancelled" || status == "Completed")
+                  Expanded(
+                    child: SizedBox(
+                      height: 36.h,
+                      child: ElevatedButton(
+                        onPressed: () {
+
+                        },
+                        style: ElevatedButton.styleFrom(
+                         // maximumSize: Size(70.w, 36.h),
+                          backgroundColor: status == "Cancelled" ? AppColors.ashBlue : AppColors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40.r),
+                          ),
+                        ),
+                        child: customText(
+                          text: status == "Cancelled" ? 'Cancel' : 'Completed',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
-                    child: customText(
-                      text: 'Cancel',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: AppColors.white,
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 2.w,
-                  height: 82.h,
-                  color: AppColors.lightGrey,
-                ),
-                SizedBox(
-                  width: 121.w,
-                  height: 36.h,
-                  child: ElevatedButton(
-                    onPressed: () {
-                        Get.to(() =>const BookAppointmentScreen());
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.r),
+                  )
+                else // For other statuses
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 121.w,
+                        height: 36.h,
+                        child: ElevatedButton(
+                          onPressed: () {
+
+                          },
+                          style: ElevatedButton.styleFrom(
+                          //  maximumSize: Size(170.w, 36.h),
+                            backgroundColor: AppColors.ashBlue,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.r),
+                            ),
+                          ),
+                          child: customText(
+                            text: 'Cancel',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: AppColors.white,
+                          ),
+                        ),
                       ),
-                    ),
-                    child: customText(
-                      text: 'Completed',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: AppColors.white,
-                    ),
+                     horizontalSpacer(8),
+                      SizedBox(
+                        width: 121.w,
+                        height: 36.h,
+                        child: ElevatedButton(
+                          onPressed: () {
+                          
+                          },
+                          style: ElevatedButton.styleFrom(
+                           // maximumSize: Size(170.w, 36.h),
+                            backgroundColor: AppColors.blue,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.r),
+                            ),
+                          ),
+                          child: customText(
+                            text: 'Completed',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
               ],
             ),
+
+
           ],
         ),
       ),
