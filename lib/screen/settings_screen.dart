@@ -152,80 +152,60 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           avatarRadius: 20.r,
                         ),
                         verticalSpacer(20),
-                        GestureDetector(
-                          onTap: (){
-                            Get.to(()=>const StripPaymentMethodScreen());
-                          },
-                          child:  customRowSettingsContainer(
-                            icon: const Icon(Icons.feedback, color: Colors.white, size: 24),
-                            text: "Feedback and Support",
-                            textStyle: const TextStyle(
-                              fontSize: 16,
-                              color: AppColors.white,
-                            ),
-                            textColor: AppColors.white,
-                            iconColor: AppColors.white,
-                            fontWeight: FontWeight.w400,
+                        customRowSettingsContainer(
+                          icon: const Icon(Icons.password, color: Colors.white, size: 24),
+                          text: "Change Password",
+                          textStyle: const TextStyle(
                             fontSize: 16,
-                            avatarRadius: 20.r,
+                            color: AppColors.white,
                           ),
+                          textColor: AppColors.white,
+                          iconColor: AppColors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          avatarRadius: 20.r,
                         ),
                         verticalSpacer(20),
-                        GestureDetector(
-                          onTap: (){
-                            Get.to(()=> TermsAndConditions());
-                          },
-                          child:  customRowSettingsContainer( icon: const Icon(Icons.description, color: Colors.white, size: 24),
-                            text: "Terms & Conditions",
-                            textStyle: const TextStyle(
-                              fontSize: 16,
-                              color: AppColors.white,
-                            ),
-                            textColor: AppColors.white,
-                            iconColor: AppColors.white,
-                            fontWeight: FontWeight.w400,
+                        customRowSettingsContainer( icon: const Icon(Icons.person, color: Colors.white, size: 24),
+                          text: "Change Account Info ",
+                          textStyle: const TextStyle(
                             fontSize: 16,
-                            avatarRadius: 20.r,
+                            color: AppColors.white,
                           ),
+                          textColor: AppColors.white,
+                          iconColor: AppColors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          avatarRadius: 20.r,
                         ),
                         verticalSpacer(20),
-                        GestureDetector(
-                          onTap: (){
-                            Get.to(()=> AboutAppScreen());
-                          },
-                          child:  customRowSettingsContainer(
-                            icon: const Icon(Icons.info_outline, color: Colors.white, size: 24),
-                            text: "About App",
-                            textStyle: const TextStyle(
-                              fontSize: 16,
-                              color: AppColors.white,
-                            ),
-                            textColor: AppColors.white,
-                            iconColor: AppColors.white,
-                            fontWeight: FontWeight.w400,
+                        customRowSettingsContainer(
+                          icon: const Icon(Icons.share, color: Colors.white, size: 24),
+                          text: "Share",
+                          textStyle: const TextStyle(
                             fontSize: 16,
-                            avatarRadius: 20.r,
+                            color: AppColors.white,
                           ),
+                          textColor: AppColors.white,
+                          iconColor: AppColors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          avatarRadius: 20.r,
                         ),
                         verticalSpacer(20),
-                        GestureDetector(
-                          onTap: (){
-                            Get.to(()=> const HelpScreen());
-                          },
-                          child: customRowSettingsContainer(
-                            icon: const Icon(Icons.wb_sunny, color: Colors.white, size: 24),
-                            text: "Theme",
-                            textStyle: const TextStyle(
-                              fontSize: 16,
-                              color: AppColors.white,
-                            ),
-                            textColor: AppColors.white,
-                            iconColor: AppColors.white,
-                            fontWeight: FontWeight.w400,
+                        customRowSettingsContainer(
+                          icon: const Icon(Icons.wb_sunny, color: Colors.white, size: 24),
+                          text: "Theme",
+                          textStyle: const TextStyle(
                             fontSize: 16,
-                            avatarRadius: 20.r,
-                            showIcon: true,
+                            color: AppColors.white,
                           ),
+                          textColor: AppColors.white,
+                          iconColor: AppColors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          avatarRadius: 20.r,
+                          showIcon: true,
                         ),
 
 

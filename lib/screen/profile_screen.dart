@@ -130,19 +130,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: AppColors.white,
                         ),
                         verticalSpacer(30),
-                        customRowContainer(
-                          assetImagePath: AppImages.blueUser,
-                          text: "Update Profile",
-                          textStyle: const TextStyle(
-                            fontSize: 16,
-                            color: AppColors.white,
-                          ),
-                          textColor: AppColors.white,
-                          iconColor: AppColors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          avatarRadius: 20.r,
-                        ),
+                       GestureDetector(
+                         onTap: (){
+                           Get.to(()=> const UserDataScreen());
+                         },
+                         child:  customRowContainer(
+                           assetImagePath: AppImages.blueUser,
+                           text: "Update Profile",
+                           textStyle: const TextStyle(
+                             fontSize: 16,
+                             color: AppColors.white,
+                           ),
+                           textColor: AppColors.white,
+                           iconColor: AppColors.white,
+                           fontWeight: FontWeight.w400,
+                           fontSize: 16,
+                           avatarRadius: 20.r,
+                         ),
+                       ),
                         verticalSpacer(20),
                         GestureDetector(
                           onTap: (){

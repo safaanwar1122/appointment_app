@@ -56,13 +56,15 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                             ),
                           ),
                           const Spacer(),
-                          customText(
+                        Padding(padding: EdgeInsets.only( left: 20.w,  top: 23.h, bottom: 10.h),
+                          child:   customText(
                             text: AppConstants.termsAndConditions,
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                             color: Colors.white,
                             lineHeight: null,
                           ),
+                        ),
                           horizontalSpacer(160)
                         ],
                       ),

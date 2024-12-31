@@ -11,6 +11,7 @@ class AppConstants{
   static String upComing="Upcoming";
   static String cancelled="Cancelled";
   static String home="Home";
+  static String help="Help";
   static String settings="Settings";
   static String myProfile=" My Profile";
   static String favoriteDoctor="Favorite Doctor";
