@@ -1,13 +1,15 @@
 import 'package:appointment_app/export.dart';
 
-class UserDataScreen extends StatefulWidget {
-  const UserDataScreen({super.key});
+import '../models/user_data_model.dart';
+
+class UserDataScreenUsingSnackBarProvider extends StatefulWidget {
+  const UserDataScreenUsingSnackBarProvider({super.key});
 
   @override
-  State<UserDataScreen> createState() => _UserDataScreenState();
+  State<UserDataScreenUsingSnackBarProvider> createState() => _UserDataScreenUsingSnackBarProviderState();
 }
 
-class _UserDataScreenState extends State<UserDataScreen> {
+class _UserDataScreenUsingSnackBarProviderState extends State<UserDataScreenUsingSnackBarProvider> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController contactController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
@@ -18,13 +20,47 @@ class _UserDataScreenState extends State<UserDataScreen> {
   String? selectedGender;
   final List<String> genders = ['Male', 'Female', 'Other'];
 
+  Future<void> selectedDate(BuildContext context)async{
+    final DateTime? selectedDate=await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime.now());
+    if(selectedDate!=null){
+      setState(() {
+        //
+        birthDateController.text=selectedDate.toString();
+      });
+    }
+  }
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+var userDataProvider;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+     userDataProvider = Provider.of<UserDataProvider>(context, listen: false);
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarIconBrightness:
-          Theme.of(context).scaffoldBackgroundColor == AppColors.white
-              ? Brightness.light
-              : Brightness.light,
+      Theme.of(context).scaffoldBackgroundColor == AppColors.white
+          ? Brightness.light
+          : Brightness.light,
       statusBarColor: AppColors.white,
       systemNavigationBarColor: AppColors.white,
     ));
@@ -36,7 +72,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
         backgroundColor: Colors.transparent,
         title: Padding(
           padding:
-              EdgeInsets.only(left: 15.w, right: 65.w, top: 23.h, bottom: 10.h),
+          EdgeInsets.only(left: 15.w, right: 65.w, top: 23.h, bottom: 10.h),
           child: Column(
             children: [
               verticalSpacer(10),
@@ -51,7 +87,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                       radius: 15,
                       backgroundColor: AppColors.blue.withOpacity(0.2),
                       child:
-                          const Icon(Icons.arrow_back, color: AppColors.white),
+                      const Icon(Icons.arrow_back, color: AppColors.white),
                     ),
                   ),
                   //const Spacer(),
@@ -125,7 +161,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                   fit: BoxFit.scaleDown,
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 0.5.w, vertical: 7.h),
-                errorText: _emailError,
+                errorText:userDataProvider.usernameError,
                 textStyle: const TextStyle(
                   color: AppColors.iconColor,
                 ),
@@ -138,11 +174,13 @@ class _UserDataScreenState extends State<UserDataScreen> {
                 ),
                 decoration: InputDecoration(
                   hintText: 'Enter contact no..',
+                  errorText: userDataProvider.contactError,
                   hintStyle: TextStyle(
                     color: AppColors.grey,
                     fontWeight: FontWeight.w300,
                     fontSize: 16.sp,
                     height: 2.h,
+
                   ),
                   contentPadding: EdgeInsets.only(left: -1, top: 8.h),
                   prefixIcon: Padding(
@@ -175,42 +213,37 @@ class _UserDataScreenState extends State<UserDataScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: 160.w,
-                    child: customTextField(
-                      controller: birthDateController,
-                      //obscureText: false,
-                      hintText: "Date of Birth",
-                      hintStyle: TextStyle(
-                        color: AppColors.grey,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w300,
-                        height: 2.2.h,
-                      ),
-                      contentPadding: EdgeInsets.only(left: 5.w),
-                      prefixIcon: SvgPicture.asset(
-                        AppImages.calender,
-                        width: 18.w,
-                        height: 14.h,
-                        fit: BoxFit.scaleDown,
-                      ),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 0.5.w, vertical: 7.h),
-                      errorText: _emailError,
-                      textStyle: const TextStyle(
-                        color: AppColors.iconColor,
+                    width: 170.w,
+                    child: GestureDetector(
+                      onTap: ()=>selectedDate(context),
+                      child: AbsorbPointer(
+                        child: customTextField(
+                          controller: birthDateController,
+                          hintText: "Date of Birth",
+                          prefixIcon: SvgPicture.asset(
+                              AppImages.calender,
+                              width: 18.w,
+                              height: 14.h,
+                              fit: BoxFit.scaleDown),
+
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: 160.w,
+                    width: 150.w,
                     child: Padding(
                       padding: EdgeInsets.zero,
                       child: Column(
                         children: [
                           InputDecorator(
+
                             decoration: InputDecoration(
+
                               contentPadding: EdgeInsets.only(left: 5.w),
                               isDense: true,
+                              errorText: userDataProvider.birthDateError,
+
                               // hintText: selectedGender ?? 'Gender',
                               hintStyle: TextStyle(
                                 color: AppColors.grey,
@@ -218,6 +251,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                                 fontSize: 16.sp,
                                 height: 2.h,
                               ),
+
                               prefixIcon: Padding(
                                 padding: EdgeInsets.only(left: 15.w),
                                 child: SvgPicture.asset(
@@ -229,7 +263,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                               ),
                               enabledBorder: const UnderlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: AppColors.lightGrey),
+                                BorderSide(color: AppColors.lightGrey),
                               ),
                             ),
                             child: DropdownButtonHideUnderline(
@@ -258,7 +292,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                                   );
                                 }).toList(),
                                 icon: Padding(
-                                  padding: EdgeInsets.only(right: 10.w),
+                                  padding: EdgeInsets.only(right: 4.w),
                                   child: const Icon(Icons.keyboard_arrow_down),
                                 ),
                               ),
@@ -270,6 +304,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                   ),
                 ],
               ),
+
               customTextField(
                 controller: locationController,
                 //  obscureText: false,
@@ -281,19 +316,20 @@ class _UserDataScreenState extends State<UserDataScreen> {
                   height: 2.h,
                 ),
                 contentPadding: const EdgeInsets.only(left: -1.0),
+                errorText:userDataProvider.locationError,
                 prefixIcon: SvgPicture.asset(
                   AppImages.location,
                   width: 16.w,
                   height: 19.h,
                   fit: BoxFit.scaleDown,
                 ),
-                suffixIcon: Padding(
+               /* suffixIcon: Padding(
                   padding: EdgeInsets.only(right: 10.w),
                   child: SizedBox(
                       width: 24.w,
                       height: 24.h,
                       child: const Icon(Icons.keyboard_arrow_down)),
-                ),
+                ),*/
                 padding: EdgeInsets.symmetric(vertical: 5.h),
                 textStyle: const TextStyle(
                   color: AppColors.iconColor,
@@ -305,8 +341,29 @@ class _UserDataScreenState extends State<UserDataScreen> {
                 onPressed: _isLoading
                     ? () {}
                     : () {
-                        Get.to(() => const HostScreen());
-                      },
+
+                  if (usernameController.text.isEmpty) {
+                    _showSnackBar(context, 'Please enter your full name.');
+                    return;
+                  }
+                  if(contactController.text.isEmpty){
+                    _showSnackBar(context, 'Please enter your contact number.');
+                    return;
+                  }
+                  if(birthDateController.text.isEmpty){
+                    _showSnackBar(context, 'Please select your date of birth.');
+                    return;
+                  }
+                  if(selectedGender==null){
+                    _showSnackBar(context, 'Please select your gender.');
+                    return;
+                  }
+                  if(locationController.text.isEmpty){
+                    _showSnackBar(context, 'Please enter your location.');
+                    return;
+                  }
+                  Get.to(() => const HostScreen());
+                },
                 buttonColor: AppColors.blue,
                 textColor: AppColors.white,
                 width: 300.w,
