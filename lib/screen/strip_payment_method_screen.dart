@@ -14,6 +14,6 @@ class _StripPaymentMethodScreenState extends State<StripPaymentMethodScreen> {
   @override
 
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

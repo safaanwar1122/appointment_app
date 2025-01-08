@@ -1,7 +1,8 @@
 import 'package:appointment_app/export.dart';
 
 class DynamicChatScreen extends StatefulWidget {
-  const DynamicChatScreen({super.key});
+final String doctorName;
+  const DynamicChatScreen({super.key, required this.doctorName});
 
   @override
   State<DynamicChatScreen> createState() => _DynamicChatScreenState();
@@ -84,7 +85,7 @@ class _DynamicChatScreenState extends State<DynamicChatScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           customText(
-                            text: 'Dr. John Doe',
+                            text: widget.doctorName,
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                             color: AppColors.white,

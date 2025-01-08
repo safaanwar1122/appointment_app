@@ -181,7 +181,9 @@ class ChatScreenUsingProvider extends StatelessWidget {
   }) {
     return GestureDetector(
       onTap: (){
-        Get.to(() => const DynamicChatScreen());
+        Get.to(() =>  DynamicChatScreen(
+doctorName: title,
+        ));
       },
       child: Padding(
 

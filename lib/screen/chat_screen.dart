@@ -186,7 +186,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }) {
     return GestureDetector(
       onTap: (){
-        Get.to(() => const DynamicChatScreen());
+        Get.to(() => DynamicChatScreen(doctorName: title));
       },
       child: Container(
         width: 344.w,
