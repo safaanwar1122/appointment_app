@@ -47,7 +47,7 @@ class _AppointmentDetailsScreenState extends State<AppointmentDetailsScreen> {
                             child: CircleAvatar(
                               radius: 16,
                               backgroundColor: AppColors.blue.withOpacity(.1),
-                              child: Container(
+                              child: SizedBox(
                                 width: 40.w,
                                 height: 40.h,
                                 child:

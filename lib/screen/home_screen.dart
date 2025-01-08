@@ -1,8 +1,4 @@
 import 'package:appointment_app/export.dart';
-import 'package:appointment_app/screen/favorite_doctor_screen.dart';
-
-import '../widgets/doctor_card.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,9 +9,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late HomeDoctorsProvider doctorsProvider;
+  @override
   void didChangeDependencies(){
     super.didChangeDependencies();
-    doctorsProvider= doctorsProvider=Provider.of<HomeDoctorsProvider>(context);
+    doctorsProvider= doctorsProvider=Provider.of<HomeDoctorsProvider>(context, listen: false);
 
   }
   @override
@@ -92,9 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             specialization: doctor.specialization,
                             favouriteIconPath: AppImages.redHeartIcon,
                             startIcon: AppImages.starIcon,
-                            isFavorite: doctor.isFavorite, // Dynamically track favorite status
+                            isFavorite: doctor.isFavorite,
                             onBookTap: () {
-                              // Add booking functionality here
+
                             },
                             onFavoriteTap: () {
                               doctorsProvider.toggleFavorite(doctor.name);
@@ -344,11 +341,150 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+  }
 
 
 
+Widget doctorCard({
+  required String imagePath,
+  required String doctorId,
+  required String doctorName,
+  required String specialization,
+  required VoidCallback onBookTap,
+  required VoidCallback onFavoriteTap,
+  bool isFavorite = false,
+  String? favouriteIconPath,
+  String? startIcon,
+}) {
+  return Consumer<HomeDoctorsProvider>(
+    builder: (context, doctorsProvider, child) {
+      return Container(
+        width: 169,
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
 
+            Align(
+              alignment: Alignment.topCenter,
+              child: CircleAvatar(
+                radius: 40,
+                backgroundImage: AssetImage(imagePath),
+              ),
+            ),
 
+            Positioned(
+              top: 70,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Container(
+                  width: 70.w,
+                  height: 30.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.ashBlue,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(AppImages.starIcon),
+                      horizontalSpacer(4),
+                      customText(
+                        text: '4.9',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        color: AppColors.black,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // Doctor's name
+            Positioned(
+              top: 100,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Text(
+                  doctorName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+            // Specialization
+            Positioned(
+              top: 120,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Text(
+                  specialization,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ),
+            // Book button
+            Positioned(
+              top: 150,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: onBookTap,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text(
+                    "Book",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // Favorite icon (top-right corner)
+            Positioned(
+              top: 8,
+              right: 8,
+              child: GestureDetector(
+                onTap: onFavoriteTap,
+                child: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite ? Colors.red : Colors.grey,
+                  size: 24,
+                ),
+              ),
+            ),
+          ],
+        )
+
+      );
+    },
+  );
 }
-
-

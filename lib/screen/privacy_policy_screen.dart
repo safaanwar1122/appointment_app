@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:appointment_app/export.dart';
 class PrivacyPolicyScreen extends StatefulWidget {
+  const PrivacyPolicyScreen({super.key});
+
   @override
   _PrivacyPolicyScreenState createState() => _PrivacyPolicyScreenState();
 }

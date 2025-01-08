@@ -1,8 +1,4 @@
 import 'package:appointment_app/export.dart';
-import 'package:provider/provider.dart';
-
-import '../controllers/message_call_provider.dart'; // Import provider package
-
 class ChatScreenUsingProvider extends StatelessWidget {
   const ChatScreenUsingProvider({super.key});
 

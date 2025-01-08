@@ -1,10 +1,5 @@
 import 'package:appointment_app/export.dart';
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../controllers/appointment_doctor_provider.dart';
-import '../models/appointment_doctor_details_model.dart';
-
 class AppointmentScreenUsingProvider extends StatefulWidget {
   const AppointmentScreenUsingProvider({super.key});
 
@@ -19,8 +14,11 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<AppointmentProvider>(context,listen: false).filterData("Upcoming");
-  }
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      Provider.of<AppointmentProvider>(context,listen: false).filterData("Upcoming");
+
+    });
+   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -296,15 +294,20 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
                     ),
                   ),
                   const Spacer(),
-                  CircleAvatar(
-                    radius: 20.r,
-                    backgroundColor: AppColors.blueLavender.withOpacity(0.3),
-                    child: SvgPicture.asset(AppImages.blueForwardArrow),
+                  GestureDetector(
+                    onTap: (){
+                      Get.to(()=> const AppointmentDetailsScreen());
+                    },
+                    child: CircleAvatar(
+                      radius: 20.r,
+                      backgroundColor: AppColors.blueLavender.withOpacity(0.3),
+                      child: SvgPicture.asset(AppImages.blueForwardArrow),
+                    ),
                   ),
                 ],
               ),
               verticalSpacer(18),
-              // Conditionally show the red container only for "Upcoming" status
+
               if (status == "Upcoming")
                 Container(
                   width: double.infinity,
@@ -363,7 +366,7 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
                           ),
                         ),
                         horizontalSpacer(8),
-                        // Only show the light gray container for "Upcoming" status
+
                         if (status == "Upcoming")
                           Padding(
                             padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 2.h, top: 0.h),
@@ -391,7 +394,7 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
                               ),
                             ),
                             child: customText(
-                              text: 'Completed',
+                              text: 'Reschedule',
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
                               color: AppColors.white,
@@ -408,9 +411,5 @@ class _AppointmentScreenUsingProviderState extends State<AppointmentScreenUsingP
       ),
     );
   }
-
-
-
-
 }
 

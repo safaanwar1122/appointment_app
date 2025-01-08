@@ -1,13 +1,7 @@
-import 'dart:ui';
+
 import 'package:appointment_app/export.dart';
-import '../controllers/export_controller.dart';
-import '../screen/favorite_doctor_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 Widget doctorCard({
   required String imagePath,
   required String doctorId,

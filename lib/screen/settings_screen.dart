@@ -1,11 +1,5 @@
 
 import 'package:appointment_app/export.dart';
-import 'package:appointment_app/screen/about_app_screen.dart';
-import 'package:appointment_app/screen/favorite_doctor_screen.dart';
-import 'package:appointment_app/screen/help_screen.dart';
-import 'package:appointment_app/screen/privacy_policy_screen.dart';
-import 'package:appointment_app/screen/strip_payment_method_screen.dart';
-import 'package:appointment_app/screen/terms_conditions_screen.dart';
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
   @override

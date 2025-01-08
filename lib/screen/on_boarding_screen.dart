@@ -1,5 +1,4 @@
 import 'package:appointment_app/export.dart';
-import 'package:appointment_app/screen/login_screen_using_provider.dart';
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
 

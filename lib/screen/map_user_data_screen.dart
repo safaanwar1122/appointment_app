@@ -1,6 +1,4 @@
 import 'package:appointment_app/export.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 
 
 class MapUserDataScreen extends StatefulWidget {

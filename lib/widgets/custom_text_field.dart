@@ -2,10 +2,7 @@
 import 'package:appointment_app/export.dart';
 Widget customTextField( {
   required TextEditingController controller,
-  //required String labelText,
-  // required bool obscureText,
- // required String fieldKey,
-  //required Map<String, dynamic> profile,
+
   EdgeInsetsGeometry? padding,
   TextStyle? textStyle,
   TextStyle? hintStyle,

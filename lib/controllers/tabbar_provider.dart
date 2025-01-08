@@ -2,7 +2,7 @@ import 'package:appointment_app/export.dart';
 
 
 class TabProvider with ChangeNotifier {
-  String _selectedTab = 'Upcoming'; // Default screen
+  String _selectedTab = 'Upcoming';
 
   String get selectedTab => _selectedTab;
 

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:appointment_app/export.dart';
 class TermsAndConditions extends StatefulWidget {
+  const TermsAndConditions({super.key});
+
   @override
   _TermsAndConditionsState createState() => _TermsAndConditionsState();
 }

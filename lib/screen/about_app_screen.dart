@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:appointment_app/export.dart';
 class AboutAppScreen extends StatefulWidget {
+  const AboutAppScreen({super.key});
+
   @override
   _AboutAppScreenState createState() => _AboutAppScreenState();
 }

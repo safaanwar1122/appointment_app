@@ -2,7 +2,6 @@
 import 'package:appointment_app/export.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../controllers/available_time_provider.dart';
 class BookAppointmentScreen extends StatefulWidget {
   const BookAppointmentScreen({super.key});
   @override
@@ -11,15 +10,16 @@ class BookAppointmentScreen extends StatefulWidget {
 
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   final TextEditingController controller=TextEditingController();
-  var containerColorProvider;
-  var   availableTimes;
+  ContainerStateProvider? containerColorProvider;
+ var  availableTimes;
   late DateTime _selectedDay;
   late DateTime _focusedDay;
+
   @override
   void didChangeDependencies(){
     super.didChangeDependencies();
-    containerColorProvider = Provider.of<ContainerStateProvider>(context);
-     availableTimes = Provider.of<AvailableTimeProvider>(context).availableTimes;
+    containerColorProvider = Provider.of<ContainerStateProvider>(context, listen: false);
+     availableTimes = Provider.of<AvailableTimeProvider>(context, listen: false).availableTimes ;
 
   }
 
@@ -333,39 +333,43 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     fontSize: 16,
                     color: AppColors.blue),
                 verticalSpacer(10),
-                TableCalendar(
-                  firstDay: DateTime(2020),
-                  lastDay: DateTime(2025),
-                  focusedDay: _focusedDay,
-                  selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-                  onDaySelected: (selectedDay, focusedDay) {
-                    setState(() {
-                      _selectedDay = selectedDay;
-                      _focusedDay = focusedDay;
-                    });
-                  },
-                  calendarStyle: const CalendarStyle(
-                    todayDecoration: BoxDecoration(
-                      color: Colors.blue,
-                      shape: BoxShape.circle,
-                    ),
-                    selectedDecoration: BoxDecoration(
-                      color: Colors.orange,
-                      shape: BoxShape.circle,
-                    ),
-                    selectedTextStyle: TextStyle(color: Colors.white),
-                  ),
-                  headerStyle: const HeaderStyle(
-                    formatButtonVisible: false,
-                    titleCentered: true,
-                    headerMargin: EdgeInsets.zero,
-                    titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    headerPadding: EdgeInsets.symmetric(vertical: 4),
-                  ),
-
-                  startingDayOfWeek: StartingDayOfWeek.monday,
+            TableCalendar(
+              firstDay: DateTime(2020),
+              lastDay: DateTime(2025, 12, 31),
+              focusedDay: _focusedDay,
+              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+              onDaySelected: (selectedDay, focusedDay) {
+                setState(() {
+                  _selectedDay = selectedDay;
+                  _focusedDay = focusedDay;
+                });
+              },
+              calendarStyle: const CalendarStyle(
+                todayDecoration: BoxDecoration(
+                  color: Colors.orange,
+                  shape: BoxShape.circle,
                 ),
-                verticalSpacer(40),
+                selectedDecoration: BoxDecoration(
+                  color: AppColors.blue,
+                  shape: BoxShape.circle,
+                ),
+                selectedTextStyle: TextStyle(
+                  color: AppColors.white,
+                ),
+              ),
+              headerStyle: const HeaderStyle(
+                formatButtonVisible: false,
+                titleCentered: true,
+                headerMargin: EdgeInsets.zero,
+                titleTextStyle: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                headerPadding: EdgeInsets.symmetric(vertical: 4),
+              ),
+              startingDayOfWeek: StartingDayOfWeek.monday,
+            ),
+             verticalSpacer(40),
                 customText(
                     text: 'Available Time',
                     fontWeight: FontWeight.w500,
@@ -411,7 +415,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 customButton(
                     label: 'Make Appointment',
                     onPressed: () {
-                      Get.to(() => const AppointmentDetailsScreen());
+                      Get.to(() => const AppointmentSuccessfulScreen());
                     },
                     buttonColor: AppColors.blue,
                     textColor: AppColors.white),

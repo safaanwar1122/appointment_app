@@ -1,7 +1,4 @@
 import 'package:appointment_app/export.dart';
-import 'package:appointment_app/screen/sign_up_screen_using_provider.dart';
-
-import '../widgets/custom_text_field_using_provider.dart';
 
 class LoginScreenUsingProvider extends StatefulWidget {
   const LoginScreenUsingProvider({super.key});

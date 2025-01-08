@@ -1,7 +1,5 @@
 import 'package:appointment_app/export.dart';
 
-import '../models/messages_calls_model.dart';
-
 class MessageCallProvider with ChangeNotifier{
   String _selectedScreen='Messages';
   final List<Message> _messages = [

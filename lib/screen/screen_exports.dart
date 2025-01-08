@@ -17,3 +17,22 @@ export 'user_data_screen.dart';
 export 'video_call_screen.dart';
 export '../models/home_doctors_list_model.dart';
 export '../controllers/export_controller.dart';
+
+export 'package:appointment_app/screen/about_app_screen.dart';
+export 'package:appointment_app/screen/terms_conditions_screen.dart';
+export 'appointment_screen_using_provider.dart';
+export 'chat_screen_using_provider.dart';
+export 'package:appointment_app/screen/login_screen_using_provider.dart';
+export 'package:appointment_app/screen/sign_up_screen_using_provider.dart';
+export '../widgets/custom_text_field_using_provider.dart';
+export 'package:geocoding/geocoding.dart';
+export 'package:geolocator/geolocator.dart';
+export 'package:appointment_app/screen/favorite_doctor_screen.dart';
+export 'package:appointment_app/screen/help_screen.dart';
+export 'package:appointment_app/screen/privacy_policy_screen.dart';
+export 'package:appointment_app/screen/settings_screen.dart';
+export 'package:appointment_app/screen/strip_payment_method_screen.dart';
+export 'package:appointment_app/screen/user_data_screen_snackbar_provider.dart';
+export '../models/user_data_model.dart';
+
+export '../utils/snack_bar.dart';

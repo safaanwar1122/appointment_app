@@ -1,11 +1,5 @@
 
 import 'package:appointment_app/export.dart';
-import 'package:appointment_app/screen/favorite_doctor_screen.dart';
-import 'package:appointment_app/screen/help_screen.dart';
-import 'package:appointment_app/screen/privacy_policy_screen.dart';
-import 'package:appointment_app/screen/settings_screen.dart';
-import 'package:appointment_app/screen/strip_payment_method_screen.dart';
-
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -42,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: CircleAvatar(
                       radius: 15,
                       backgroundColor: Colors.transparent,
-                      child: Container(
+                      child: SizedBox(
                         width: 40.w,
                         height: 40.h,
                         child:
@@ -189,7 +183,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         verticalSpacer(20),
                        GestureDetector(
                          onTap: (){
-                           Get.to(()=> PrivacyPolicyScreen());
+                           Get.to(()=> const PrivacyPolicyScreen());
                          },
                          child:  customRowContainer(
                            assetImagePath: AppImages.blueLock,
@@ -208,7 +202,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         verticalSpacer(20),
                        GestureDetector(
                          onTap: (){
-                           Get.to(()=> SettingsScreen());
+                           Get.to(()=> const SettingsScreen());
                          },
                          child:  customRowContainer(
                            assetImagePath: AppImages.settings,

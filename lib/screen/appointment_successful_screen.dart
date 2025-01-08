@@ -11,56 +11,85 @@ class _AppointmentSuccessfulScreenState
     extends State<AppointmentSuccessfulScreen> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness:
+      Theme.of(context).scaffoldBackgroundColor == AppColors.blue
+          ? Brightness.light
+          : Brightness.light,
+      statusBarColor: AppColors.blue,
+      systemNavigationBarColor: AppColors.blue,
+    ));
     return Scaffold(
       backgroundColor: AppColors.blue,
       body: Stack(
         children: [
-          // Shade image at top-right corner
+
           Positioned(
-            top: 0.h,
+            top: 0,
             right: 0,
             child: SvgPicture.asset(
               AppImages.shade2,
               fit: BoxFit.scaleDown,
             ),
           ),
-          Positioned(
-              top: 0.h,
-              left: 2.w,
+         /* Positioned(
+            top: 50,
+            left: 20.w,
+            child: const Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.white,
+            ),
+          ),*/
+         /* GestureDetector(
+            onTap: (){
+              Get.to((_)=>const BookAppointmentScreen());
+            },
+            child: Positioned(
+              top: 50,
+              left: 20.w,
               child: const Icon(
                 Icons.arrow_back_ios,
                 color: AppColors.white,
-              )),
-          Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Positioned(
-                  top: 10.h,
-                  child: SvgPicture.asset(
-                    AppImages.confirmation,
-                    // height: 0.3.sh,
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
-                verticalSpacer(10),
-                customText(
-                  text: 'Confirmation',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 40,
-                  color: AppColors.white,
-                ),
-                verticalSpacer(20),
-                appointmentSuccessfulCard(
-                  title: '',
-                  subTitle: '',
-                  iconImage: '',
-                ),
-              ],
+              ),
+            ),
+          ),*/
+          // Confirmation icon centered
+          Positioned(
+            top: 150.h,
+            left: 0,
+            right: 0,
+            child: SvgPicture.asset(
+              AppImages.confirmation,
+              fit: BoxFit.scaleDown,
+            ),
+          ),
+
+          Positioned(
+            top: 400.h,
+            left: 0,
+            right: 0,
+            child: customText(
+              text: 'Confirmation',
+              fontWeight: FontWeight.w600,
+              fontSize: 40,
+              color: AppColors.white,
+              textAlign: TextAlign.center,
+            ),
+          ),
+
+          Positioned(
+            top: 500.h,
+            left: 16.w, 
+            right: 16.w,
+            child: appointmentSuccessfulCard(
+              title: '',
+              subTitle: '',
+              iconImage: '',
             ),
           ),
         ],
       ),
+
     );
   }
 

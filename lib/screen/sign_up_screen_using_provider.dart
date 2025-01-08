@@ -1,7 +1,5 @@
 
 import 'package:appointment_app/export.dart';
-
-import '../widgets/custom_text_field_using_provider.dart';
 class SignUpScreenUsingProvider extends StatefulWidget {
   const SignUpScreenUsingProvider({super.key});
 
@@ -333,7 +331,7 @@ class _SignUpScreenUsingProviderState extends State<SignUpScreenUsingProvider> {
                   ),
                   TextButton(
                       onPressed: () {
-                        Get.to(() => const UserDataScreen());
+                        Get.to(() => const UserDataScreenUsingSnackBarProvider());
                       },
                       style: ButtonStyle(
                         overlayColor: MaterialStateProperty.all(Colors.transparent),

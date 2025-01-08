@@ -1,6 +1,5 @@
 import 'package:appointment_app/export.dart';
 
-import '../widgets/doctor_card.dart';
 
 class FavoriteDoctorScreen extends StatefulWidget {
   const FavoriteDoctorScreen({super.key});
@@ -12,7 +11,6 @@ class FavoriteDoctorScreen extends StatefulWidget {
 class _FavoriteDoctorScreenState extends State<FavoriteDoctorScreen> {
   @override
   Widget build(BuildContext context) {
-    final doctorsProvider = Provider.of<HomeDoctorsProvider>(context);
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: PreferredSize(
@@ -94,24 +92,24 @@ class _FavoriteDoctorScreenState extends State<FavoriteDoctorScreen> {
               : GridView.builder(
                   padding: const EdgeInsets.all(8.0),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Two cards per row
-                    crossAxisSpacing: 10.0, // Spacing between columns
-                    mainAxisSpacing: 10.0, // Spacing between rows
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10.0,
+                    mainAxisSpacing: 10.0,
                     childAspectRatio:
-                        0.8, // Adjust based on card height/width ratio
+                        0.8,
                   ),
                   itemCount: favoriteDoctors.length,
                   itemBuilder: (context, index) {
                     final doctor = favoriteDoctors[index];
                     return doctorCard(
                       imagePath: AppImages
-                          .doctorRyan, // Replace with actual image path
+                          .doctorRyan,
                       doctorId: doctor.name,
                       doctorName: doctor.name,
                       specialization: doctor.specialization,
                       isFavorite: doctor.isFavorite,
                       onBookTap: () {
-                        // Handle booking functionality here
+
                       },
                       onFavoriteTap: () {
                         doctorsProvider.toggleFavorite(doctor.name);

@@ -3,5 +3,9 @@ export 'app_constants.dart';
 export 'app_images.dart';
 export 'providers_path.dart';
 export 'responsive_utils.dart';
-
 export '../controllers/home_doctors_list_provider.dart';
+export 'package:appointment_app/controllers/message_call_provider.dart';
+export '../controllers/appointment_doctor_provider.dart';
+export '../controllers/available_time_provider.dart';
+export '../controllers/tabbar_provider.dart';
+export '../models/user_data_model.dart';
